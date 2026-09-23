@@ -171,3 +171,8 @@ p { margin: 0.4rem 0 0.8rem; max-width: 60ch; }
 .phraselist li { display: flex; align-items: center; gap: 0.7rem; padding: 0.45rem 0; border-top: 1px solid var(--line); }
 .phraselist .y { font-family: var(--serif); font-size: 1.15rem; flex: 1; }
 .phraselist .e { color: var(--ink-3); font-size: 0.9rem; }
+
+.install-hint { color: var(--ink-2); font-size: 0.98rem; margin-top: 0.6rem; }
+.share { display: inline-block; width: 0.9em; height: 1.05em; vertical-align: -0.15em; margin-right: 0.15em;
+  background: currentColor; -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'><path d='M10 1l5 5h-3.5v9h-3V6H5zM3 10h4v2H5v10h10V12h-2v-2h4v14H3z'/></svg>") center/contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'><path d='M10 1l5 5h-3.5v9h-3V6H5zM3 10h4v2H5v10h10V12h-2v-2h4v14H3z'/></svg>") center/contain no-repeat; }

@@ -64,6 +64,7 @@ function showHome() {
       <h1>${esc(site.name)}</h1>
       <p>${esc(site.tagline)}</p>
       <p class="install">Thirty minutes a day. Listen, then say the phrases out loud in the gaps. No reading needed, but the transcript is there when a sound is hard to catch.</p>
+      ${installHint()}
     </div>
     ${due.length ? `<div class="review"><h2>${due.length} phrase${due.length > 1 ? "s" : ""} to review</h2><p class="small muted">A quick drill before your next lesson: hear the meaning, say the Maya, then check.</p><a class="btn" href="#/review">Start review</a></div>` : ""}
     <h2 style="margin-top:0.4rem">Lessons</h2>
@@ -77,6 +78,20 @@ function showHome() {
     </ul>
     <p class="muted small" style="margin-top:1.2rem">The Maya voice is synthetic for now. <a href="#/contribute">Native speakers can help replace it.</a></p>`;
 }
+
+// ---------------------------------------------------------------- install
+let installPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installPrompt = e; const b = $("#btn-install"); if (b) b.hidden = false; });
+const isStandalone = () => window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const isIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+function installHint() {
+  if (isStandalone()) return "";
+  if (isIOS()) return `<p class="install-hint">To install: tap <span class="share" aria-label="Share"></span> Share, then <strong>Add to Home Screen</strong>. It opens full screen like an app.</p>`;
+  return `<p class="install-hint"><button class="btn quiet" id="btn-install" ${installPrompt ? "" : "hidden"}>Install app</button><span class="muted small"> or use it in the browser; on Android, Chrome's menu also has Add to Home screen.</span></p>`;
+}
+document.addEventListener("click", async (e) => {
+  if (e.target.id === "btn-install" && installPrompt) { installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; e.target.hidden = true; }
+});
 
 function showAbout() {
   crumbs.innerHTML = `<a href="#/">Lessons</a> / About`;
