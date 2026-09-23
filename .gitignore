@@ -1,0 +1,13 @@
+.venv/
+out/
+site/
+data/raw/
+.cache/
+.pytest_cache/
+__pycache__/
+*.egg-info/
+learner.json
+lexicon.db
+.env
+.DS_STORE
+.DS_Store

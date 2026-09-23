@@ -1,0 +1,28 @@
+{
+  "howto": [
+    "Play the lesson and follow along. The line being spoken is highlighted; tap any line to jump to it.",
+    "When you see Your turn, say the phrase out loud in a full voice before the answer comes. Don't wait for it.",
+    "Hide the Maya spelling once a phrase feels familiar. Reading is a crutch; the goal is hearing and speaking.",
+    "Finish the lesson at the bottom of the transcript and tick anything you blanked on. Those phrases come back sooner in the next lessons."
+  ],
+  "sounds": [
+    {"s": "k'  p'  t'  ch'  ts'", "d": "Glottalized. Said with a sharp pop from the throat, like a small cough on the consonant. k' versus k changes the word.", "ex": "k'aaba' (name), k'iin (day)"},
+    {"s": "'", "d": "A glottal stop on its own, a catch in the throat like the middle of uh-oh. Very common at the ends of words.", "ex": "Ma'alob (fine), na' (mother)"},
+    {"s": "aa  ee  ii  oo  uu", "d": "Long vowels, held about twice as long as a single vowel, with a low, level pitch.", "ex": "beel (road), jaaj (yes)"},
+    {"s": "áa  ée  íi  óo  úu", "d": "Long vowels with a high, falling pitch. Yucatec Maya is tonal: sáamal and saamal are different words.", "ex": "sáamal (tomorrow), táan (progressive marker)"},
+    {"s": "a'  e'  i'  o'  u'", "d": "A vowel cut off by a glottal stop, often re-articulated: a-'a.", "ex": "Ma'alob, k'aaba'e'"},
+    {"s": "x", "d": "Sounds like English sh.", "ex": "Bix (how), xook (study)"},
+    {"s": "j", "d": "A breathy h, as in Spanish jamón.", "ex": "jaaj (yes), jeel (another)"},
+    {"s": "ch", "d": "As in English church.", "ex": "chiich (grandmother)"},
+    {"s": "ts", "d": "As in English cats, at the start of a word.", "ex": "ts'o'ok (already)"},
+    {"s": "w", "d": "As in English water. Appears before vowels after in, a, u: in wíits'in.", "ex": "wotoch (house)"}
+  ],
+  "patterns": [
+    {"t": "in, a, u", "d": "My, your, his or her. They go in front of the word: in k'aaba', my name; a beel, your road; u yotoch, his house."},
+    {"t": "táan in bin", "d": "Táan marks something happening right now. Táan in bin, I'm going. Táan a bin, you're going."},
+    {"t": "túun", "d": "Then, or so. Ends many sentences: Ma'alob túun, alright then."},
+    {"t": "Tak", "d": "Until. Tak sáamal, until tomorrow. Tak tu jeel k'iin, until another day."},
+    {"t": "Bix", "d": "How. Bix a beel, how is your road, how are you. Bix a k'aaba', how is your name, what's your name."}
+  ],
+  "spelling": "Spelling follows the 2014 INALI standard used across the Yucatán Peninsula. Older books use colonial spellings (c for k, dz for ts', cħ for ch'); the sounds are the same."
+}

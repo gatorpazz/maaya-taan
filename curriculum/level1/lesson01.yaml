@@ -1,0 +1,113 @@
+number: 1
+title: Meeting someone
+opening:
+  id: l01_open
+  setting_en: Two neighbors, José and Luis, meet on the street in the morning.
+  lines:
+    - {speaker: A, yua: "Bix a beel", en: "How are you?", attested_by: [YUAES0007004]}
+    - {speaker: B, yua: "Ma'alob. Bix a beel", en: "Fine. How are you?", attested_by: [YUAES0007013, YUAES0007004]}
+    - {speaker: A, yua: "Ma'alob. Bix a k'aaba'", en: "Fine. What's your name?", attested_by: [YUAES0007013, YUAES0004153]}
+    - {speaker: B, yua: "In k'aaba'e' Luis. Bix a k'aaba'", en: "My name is Luis. What's your name?", attested_by: [YUAES0004147, YUAES0004153]}
+    - {speaker: A, yua: "José in k'aaba'", en: "My name is José.", attested_by: [YUAES0004164]}
+    - {speaker: B, yua: "Ma'alob túun. Tak sáamal", en: "Alright then. See you tomorrow.", attested_by: [YUAES0007013, YUAES0007012]}
+    - {speaker: A, yua: "Tak sáamal", en: "See you tomorrow.", attested_by: [YUAES0007012]}
+items:
+  - id: bix_a_beel
+    yua: Bix a beel
+    en: How are you?
+    es: ¿Cómo estás?
+    literal: how (is) your road
+    syllables: [beel, a beel, Bix a beel]
+    glosses: {beel: road, a beel: your road, Bix a beel: how is your road}
+    note: Literally, how is your road. Maya asks about your path, not your being.
+    cues:
+      - You meet your neighbor in the morning. Ask how she is.
+      - A friend walks up to you. Ask how he is doing.
+    attested_by: [YUAES0007004]
+  - id: maalob
+    yua: Ma'alob
+    en: Fine. Good.
+    es: Bien
+    syllables: [lob, a'alob, Ma'alob]
+    note: Notice the small catch in the middle of the word. That's a glottal stop, written with an apostrophe.
+    cues:
+      - Someone asks how you are. Tell them you're fine.
+    attested_by: [YUAES0007013]
+  - id: bix_a_kaaba
+    yua: Bix a k'aaba'
+    en: What's your name?
+    es: ¿Cómo te llamas?
+    literal: how (is) your name
+    syllables: [ba', aaba', k'aaba', a k'aaba', Bix a k'aaba']
+    glosses: {k'aaba': name, a k'aaba': your name}
+    note: The k has a sharp pop to it. That's a glottalized k, written k with an apostrophe.
+    cues:
+      - You've just met someone. Ask their name.
+    transforms:
+      - {prompt_en: "Now ask, what's his name?", yua: "Bix u k'aaba'", attested_by: [YUAES0004155]}
+    attested_by: [YUAES0004153]
+  - id: in_kaabae
+    yua: In k'aaba'e' Luis
+    en: My name is Luis.
+    es: Mi nombre es Luis
+    literal: my name-is Luis
+    syllables: [e', ba'e', k'aaba'e', In k'aaba'e', In k'aaba'e' Luis]
+    glosses: {In k'aaba'e': my name is}
+    note: In means my. When you say this yourself, put your own name at the end.
+    cues:
+      - Someone asks your name. Tell them, using the name Luis.
+    transforms:
+      - {prompt_en: "Say it the other way around, José my name, meaning I'm José.", yua: "José in k'aaba'", attested_by: [YUAES0004164]}
+    attested_by: [YUAES0004147]
+  - id: tak_saamal
+    yua: Tak sáamal
+    en: See you tomorrow.
+    es: Hasta mañana
+    literal: until tomorrow
+    syllables: [mal, sáamal, Tak sáamal]
+    glosses: {sáamal: tomorrow, Tak sáamal: until tomorrow}
+    cues:
+      - You're leaving and will see your friend tomorrow. Say goodbye.
+    attested_by: [YUAES0007012]
+  - id: maalob_tuun
+    yua: Ma'alob túun
+    en: Alright then. OK then.
+    es: Bueno, está bien
+    syllables: [túun, Ma'alob túun]
+    glosses: {túun: then}
+    note: Túun means then. You'll hear it at the end of many sentences.
+    cues:
+      - Your friend says they have to go. Say, alright then.
+    attested_by: [YUAES0007013]
+  - id: taan_in_bin
+    yua: Táan in bin
+    en: I'm leaving. I'm going now.
+    es: Ya me voy
+    literal: progressive my going
+    syllables: [bin, in bin, Táan in bin]
+    glosses: {bin: to go, in bin: my going}
+    note: Bin is to go. Táan in bin, I'm going.
+    cues:
+      - It's late and you have to leave. Say, I'm going now.
+    attested_by: [YUAES0007022]
+  - id: tak_tu_jeel_kiin
+    yua: Tak tu jeel k'iin
+    en: See you later. Until another day.
+    es: Hasta luego
+    literal: until another day
+    syllables: [k'iin, jeel k'iin, tu jeel k'iin, Tak tu jeel k'iin]
+    glosses: {k'iin: day, jeel k'iin: another day}
+    note: K'iin means day, and also sun.
+    cues:
+      - Say goodbye without promising a day.
+    attested_by: [YUAES0007010]
+grammar_note: "You've heard a in front of beel and k'aaba', your road, your name. And in in front of k'aaba', my name. A means your, in means my."
+closing:
+  id: l01_close
+  setting_en: Later the same day, José runs into Luis again and has to hurry off.
+  lines:
+    - {speaker: A, yua: "Bix a beel Luis", en: "How are you, Luis?", attested_by: [YUAES0007004]}
+    - {speaker: B, yua: "Ma'alob. Bix a beel", en: "Fine. How are you?", attested_by: [YUAES0007013, YUAES0007004]}
+    - {speaker: A, yua: "Ma'alob. Táan in bin", en: "Fine. I'm going now.", attested_by: [YUAES0007025]}
+    - {speaker: B, yua: "Ma'alob túun. Tak tu jeel k'iin", en: "Alright then. See you later.", attested_by: [YUAES0007013, YUAES0007010]}
+    - {speaker: A, yua: "Tak tu jeel k'iin", en: "See you later.", attested_by: [YUAES0007010]}

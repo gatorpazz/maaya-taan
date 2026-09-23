@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2F7F9E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Maaya T'aan</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Atkinson+Hyperlegible+Next:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#/">Maaya T'aan</a>
+  <nav class="crumbs" id="crumbs"></nav>
+  <nav class="topnav"><a href="#/about">About</a><a href="#/contribute">Record</a></nav>
+</header>
+<div class="band" aria-hidden="true"></div>
+<main id="view" class="view"></main>
+<footer id="player" class="player" hidden>
+  <div class="now">
+    <div class="now-maya" id="now-maya">&nbsp;</div>
+    <div class="now-en" id="now-en">&nbsp;</div>
+    <div class="turn" id="turn" hidden><span class="turn-label">Your turn</span><span class="turn-bar"><span class="turn-fill" id="turn-fill"></span></span></div>
+  </div>
+  <div class="scrub"><input type="range" id="seek" min="0" max="1000" value="0" aria-label="Position"><div class="times"><span id="t-cur">0:00</span><span id="t-dur">0:00</span></div></div>
+  <div class="controls">
+    <button class="ctl" id="back" aria-label="Back 5 seconds">−5 s</button>
+    <button class="ctl play" id="play" aria-label="Play">Play</button>
+    <button class="ctl" id="fwd" aria-label="Forward 5 seconds">+5 s</button>
+    <button class="ctl rate" id="rate" aria-label="Playback speed">1×</button>
+  </div>
+  <audio id="audio" preload="metadata"></audio>
+</footer>
+<div id="toast" class="toast" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>

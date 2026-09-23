@@ -1,0 +1,41 @@
+[project]
+name = "maaya"
+version = "0.1.0"
+description = "Pimsleur-style audio lesson generator for Yucatec Maya (Maaya T'aan)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=1.8.0",
+    "en-core-web-sm",
+    "kokoro>=0.9.4",
+    "numpy>=2.5.3",
+    "pillow>=12.3.0",
+    "pydantic>=2.13.5",
+    "pyyaml>=6.0.3",
+    "scipy>=1.18.1",
+    "soundfile>=0.14.0",
+    "torch>=2.14.0",
+    "transformers>=5.17.0",
+    "typer>=0.27.2",
+]
+
+[project.scripts]
+maya = "maaya.cli:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["maaya"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
