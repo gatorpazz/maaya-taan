@@ -65,6 +65,20 @@ and the Spanish teaching fields sit next to the English ones in the lesson YAML 
 that has no Spanish yet. The pronunciation guide is written separately for each audience (`pwa/guide.en.json`,
 `pwa/guide.es.json`), not translated.
 
+## Working with Claude Code
+
+`CLAUDE.md` carries the project rules. Project skills in `.claude/skills/`:
+
+| Skill | What it does |
+|---|---|
+| `/draft-lesson [N]` | Draft the next lesson (or N) under your subscription, lint both languages, run the pedagogy reviewer, fix findings |
+| `/review-lesson N` | Read-only review by the `lesson-reviewer` agent: attestation, progression, chunking, cues, Spanish |
+| `/publish [--upto N]` | Tests, lint, `maya build`, local verification, `maya deploy`, live verification, commit and push |
+| `/voice-check N` | Rank the lesson's Maya clips by recognizer disagreement and export an excerpt to listen to |
+
+A hook (`scripts/hooks/lint_lesson.sh`) lints the lessons whenever a curriculum YAML is edited and hands problems back.
+`.claude/settings.json` pre-approves the routine commands; `maya deploy` still asks.
+
 ## Writing lessons
 
 ```bash

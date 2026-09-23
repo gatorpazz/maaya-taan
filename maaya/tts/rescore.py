@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import difflib
 import re
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -76,4 +77,17 @@ class RescoredMaya:
             if c == 0.0:
                 break
         print(f"  rescore {text!r} -> {best_hyp!r} (cer {best_cer:.0%})")
+        _log(text, rate, best_hyp, best_cer)
         return best
+
+
+LOG = Path(__file__).resolve().parents[2] / ".cache/rescore.jsonl"
+
+
+def _log(text: str, rate: float, hyp: str, cer_value: float) -> None:
+    """Append the winning take's recognizer agreement, so `maya voice-report` can rank clips later."""
+    import json
+
+    LOG.parent.mkdir(parents=True, exist_ok=True)
+    with LOG.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"text": text, "rate": rate, "hyp": hyp, "cer": round(cer_value, 3)}, ensure_ascii=False) + "\n")

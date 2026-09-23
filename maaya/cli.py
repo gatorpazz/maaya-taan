@@ -286,6 +286,65 @@ def deploy(project: str = "maaya-taan"):
     raise typer.Exit(code=r.returncode)
 
 
+@app.command(name="next-lesson")
+def next_lesson(level: str = "level1"):
+    """Print the next lesson number to write and its syllabus row."""
+    import re
+
+    lv = _level(level)
+    n = (max(l.number for l in lv.lessons) + 1) if lv.lessons else 1
+    text = (CURRICULUM / level / "SYLLABUS.md").read_text(encoding="utf-8")
+    row = next((line for line in text.splitlines() if re.match(rf"\|\s*{n}\s*\|", line)), "(no syllabus row)")
+    typer.echo(f"next: {n}")
+    typer.echo(row)
+    if lv.lessons:
+        last = lv.lessons[-1]
+        typer.echo(f"last written: {last.number} {last.title!r} with {len(last.items)} items: " + ", ".join(i.yua for i in last.items))
+
+
+@app.command(name="voice-report")
+def voice_report(lesson: int, level: str = "level1", worst: int = 25):
+    """Rank a rendered lesson's Maya clips by how poorly the MMS recognizer agrees with them (cached per clip)."""
+    import json
+
+    import soundfile as sf
+    from scipy.signal import resample_poly
+
+    from maaya.tts.rescore import cer, get_asr
+
+    ref_path = OUT / "lessons" / f"L1-{lesson:02d}.en.lesson.json"
+    if not ref_path.exists():
+        raise typer.BadParameter(f"{ref_path} not found; render the lesson first")
+    clips = json.loads(ref_path.read_text(encoding="utf-8"))["clips"]
+    cache_path = OUT / "lessons" / "voice-report.json"
+    cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
+    asr = None
+    rows = []
+    for key, rel in clips.items():
+        text, rate, slice_of = key.split("|")
+        path = OUT / "lessons" / rel
+        ck = f"{rel}:{path.stat().st_mtime_ns}"
+        if ck not in cache:
+            asr = asr or get_asr()
+            wav, sr = sf.read(path, dtype="float32")
+            if sr != 16000:
+                from math import gcd
+
+                g = gcd(sr, 16000)
+                wav = resample_poly(wav, 16000 // g, sr // g)
+            hyp = asr.transcribe(wav, 16000)
+            cache[ck] = {"hyp": hyp, "cer": round(cer(text, hyp), 3)}
+        rows.append({"text": text, "rate": float(rate), "fragment": bool(slice_of), **cache[ck]})
+    cache_path.write_text(json.dumps(cache, ensure_ascii=False))
+    rows.sort(key=lambda r: -r["cer"])
+    typer.echo(f"{'cer':>5}  {'rate':>4}  text -> recognizer heard      ('!' = phrase of 3+ words above 40%; fragments are cut from full-phrase audio)")
+    for r in rows[:worst]:
+        flag = "!" if (not r["fragment"] and len(r["text"].split()) >= 3 and r["cer"] > 0.4) else " "
+        kind = "frag" if r["fragment"] else "    "
+        typer.echo(f"{r['cer']:5.0%}{flag} {r['rate']:4g} {kind} {r['text']!r} -> {r['hyp']!r}")
+    typer.echo(f"{len(rows)} clips")
+
+
 @app.command()
 def feed(base_url: str = "http://localhost:8000"):
     """Write out/podcast.xml. Serve with: python -m http.server -d out 8000"""

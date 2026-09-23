@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run maya *)",
+      "Bash(uv run pytest *)",
+      "Bash(uv run python *)",
+      "Bash(uv sync*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push*)",
+      "Bash(ffprobe *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(curl *)",
+      "Bash(python3 *)",
+      "Bash(node --check *)",
+      "Read",
+      "Edit(curriculum/**)",
+      "Edit(pwa/**)",
+      "Edit(maaya/**)",
+      "Edit(tests/**)",
+      "Edit(scripts/**)"
+    ],
+    "ask": [
+      "Bash(uv run maya deploy*)",
+      "Bash(git push --force*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/lint_lesson.sh",
+            "timeout": 120,
+            "statusMessage": "Linting lesson"
+          }
+        ]
+      }
+    ]
+  }
+}
