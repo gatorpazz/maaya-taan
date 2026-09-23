@@ -19,7 +19,7 @@
 <header class="top">
   <a class="brand" href="#/">Maaya T'aan</a>
   <nav class="crumbs" id="crumbs"></nav>
-  <nav class="topnav"><a href="#/about">About</a><a href="#/contribute">Record</a></nav>
+  <nav class="topnav"><a href="#/about" data-t="nav_about">About</a><a href="#/contribute" data-t="nav_record">Record</a><span class="langs"><button class="lang" data-lang="en" aria-label="English">EN</button><button class="lang" data-lang="es" aria-label="Español">ES</button></span></nav>
 </header>
 <div class="band" aria-hidden="true"></div>
 <main id="view" class="view"></main>
@@ -27,12 +27,12 @@
   <div class="now">
     <div class="now-maya" id="now-maya">&nbsp;</div>
     <div class="now-en" id="now-en">&nbsp;</div>
-    <div class="turn" id="turn" hidden><span class="turn-label">Your turn</span><span class="turn-bar"><span class="turn-fill" id="turn-fill"></span></span></div>
+    <div class="turn" id="turn" hidden><span class="turn-label" data-t="your_turn">Your turn</span><span class="turn-bar"><span class="turn-fill" id="turn-fill"></span></span></div>
   </div>
   <div class="scrub"><input type="range" id="seek" min="0" max="1000" value="0" aria-label="Position"><div class="times"><span id="t-cur">0:00</span><span id="t-dur">0:00</span></div></div>
   <div class="controls">
     <button class="ctl" id="back" aria-label="Back 5 seconds">−5 s</button>
-    <button class="ctl play" id="play" aria-label="Play">Play</button>
+    <button class="ctl play" id="play" aria-label="Play" data-t="play">Play</button>
     <button class="ctl" id="fwd" aria-label="Forward 5 seconds">+5 s</button>
     <button class="ctl rate" id="rate" aria-label="Playback speed">1×</button>
   </div>

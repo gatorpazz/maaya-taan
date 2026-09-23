@@ -7,8 +7,12 @@ GAP = 0.35  # silence appended after every utterance by the renderer
 AFTER_ANSWER = 1.2  # breath before the narrator moves on
 
 
-def narrator_seconds(text: str) -> float:
-    return max(0.8, 0.0564 * len(text) + 0.57)
+NARRATOR_SPC = {"en": (0.0564, 0.57), "es": (0.0564, 0.44)}  # (seconds per char, intercept); es recalibrated below
+
+
+def narrator_seconds(text: str, lang: str = "en") -> float:
+    a, b = NARRATOR_SPC.get(lang, NARRATOR_SPC["en"])
+    return max(0.8, a * len(text) + b)
 
 
 def maya_seconds(text: str, rate: float = 1.0) -> float:

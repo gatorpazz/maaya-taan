@@ -133,17 +133,17 @@ def write_clips(script: Script, voices: Voices, clips_dir: Path) -> dict[str, st
 
 
 def render(script: Script, voices: Voices, out: Path, album: str = "Maaya T'aan", track: int | None = None, cover: Path | None = None,
-           meanings: dict[str, str] | None = None) -> tuple[Path, dict[str, str]]:
-    """Write <out>.mp3, a sibling <stem>.json timeline, and <stem>.clips/ with isolated clips."""
+           meanings: dict[str, str] | None = None, clips_dir: Path | None = None) -> tuple[Path, dict[str, str]]:
+    """Write <out>.mp3, a sibling <stem>.json timeline, and a clips dir with isolated Maya clips (shared across languages)."""
     import json
 
     wav, timeline = build_waveform(script, voices)
     export_mp3(wav, out, title=script.title, album=album, track=track, cover=cover)
-    clips = write_clips(script, voices, out.with_suffix(".clips"))
+    clips = write_clips(script, voices, clips_dir or out.with_suffix(".clips"))
     if meanings:
         for seg in timeline:
             if seg["kind"] == "maya":
-                seg["en"] = meanings.get(seg["text"].lower(), "")
+                seg["meaning"] = meanings.get(seg["text"].lower(), "")
     out.with_suffix(".json").write_text(json.dumps({
         "lesson_id": script.lesson_id, "title": script.title, "duration": round(len(wav) / TARGET_SR, 3),
         "audio": out.name, "segments": timeline}, ensure_ascii=False, indent=0), encoding="utf-8")

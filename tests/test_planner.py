@@ -49,3 +49,19 @@ def test_recall_prompt_precedes_answer():
         if s.note.endswith(":s2"):
             assert segs[i + 1].kind == "pause" and segs[i + 1].seconds >= 2.0
             assert segs[i + 2].kind == "maya"
+
+
+def test_spanish_plan_uses_spanish_narration():
+    from maaya.curriculum import load_lesson
+    from pathlib import Path
+
+    les = load_lesson(Path("curriculum/level1/lesson01.yaml"))
+    en = plan_lesson(les, {}, LearnerState(), lang="en")
+    es = plan_lesson(les, {}, LearnerState(), lang="es")
+    narr_en = [s.text for s in en.script.segments if s.kind == "narrator"]
+    narr_es = [s.text for s in es.script.segments if s.kind == "narrator"]
+    assert narr_es[0].startswith("Esto es Maaya T'aan") and narr_en[0].startswith("This is Maaya T'aan")
+    assert any("¿Cómo se dice" in x for x in narr_es) and not any("How do you say" in x for x in narr_es)
+    maya_en = [s.text for s in en.script.segments if s.kind == "maya"]
+    maya_es = [s.text for s in es.script.segments if s.kind == "maya"]
+    assert set(maya_en) == set(maya_es)  # same Maya content in both languages (order follows narrator timing)

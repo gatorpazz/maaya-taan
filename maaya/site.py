@@ -37,17 +37,24 @@ def load_config() -> dict:
     return cfg
 
 
+LANGS = ["en", "es"]
+
+
 def public_manifest(level: Level) -> dict:
     rows = []
     for les in level.lessons:
         lid = f"L1-{les.number:02d}"
-        tl = LESSONS / f"{lid}.json"
-        if not tl.exists():
+        variants = {}
+        for lang in LANGS:
+            tl = LESSONS / f"{lid}.{lang}.json"
+            if tl.exists():
+                variants[lang] = {"duration": json.loads(tl.read_text(encoding="utf-8"))["duration"]}
+        if not variants:
             continue
-        t = json.loads(tl.read_text(encoding="utf-8"))
-        rows.append({"id": lid, "number": les.number, "title": les.title, "duration": t["duration"],
-                     "new_items": len(les.items), "items": [{"id": i.id, "yua": i.yua, "en": i.en} for i in les.items]})
-    return {"level": level.name, "lessons": rows}
+        rows.append({"id": lid, "number": les.number, "title": {"en": les.title, "es": les.title_es or les.title},
+                     "variants": variants, "new_items": len(les.items),
+                     "items": [{"id": i.id, "yua": i.yua, "en": i.en, "es": i.es or i.en} for i in les.items]})
+    return {"level": level.name, "langs": LANGS, "lessons": rows}
 
 
 def build(level: Level, out: Path = SITE) -> Path:
@@ -57,8 +64,9 @@ def build(level: Level, out: Path = SITE) -> Path:
     (out / "lessons").mkdir()
     for les in public_manifest(level)["lessons"]:
         lid = les["id"]
-        for suffix in (".mp3", ".json", ".lesson.json"):
-            shutil.copy2(LESSONS / f"{lid}{suffix}", out / "lessons" / f"{lid}{suffix}")
+        for lang in les["variants"]:
+            for suffix in (".mp3", ".json", ".lesson.json"):
+                shutil.copy2(LESSONS / f"{lid}.{lang}{suffix}", out / "lessons" / f"{lid}.{lang}{suffix}")
         clips = LESSONS / f"{lid}.clips"
         if clips.exists():
             shutil.copytree(clips, out / "lessons" / f"{lid}.clips")

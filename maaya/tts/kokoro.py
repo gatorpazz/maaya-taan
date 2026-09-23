@@ -8,10 +8,10 @@ class KokoroNarrator:
     name = "kokoro"
     sample_rate = 24000
 
-    def __init__(self, voice: str = "af_heart"):
+    def __init__(self, voice: str = "af_heart", lang_code: str = "a"):
         from kokoro import KPipeline
 
-        self.pipe = KPipeline(lang_code="a", repo_id="hexgrad/Kokoro-82M")
+        self.pipe = KPipeline(lang_code=lang_code, repo_id="hexgrad/Kokoro-82M")
         self.voice = voice
         self.name = f"kokoro-{voice}"
 

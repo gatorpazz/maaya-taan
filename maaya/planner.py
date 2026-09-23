@@ -18,6 +18,7 @@ from maaya import timing
 from maaya.curriculum import Dialogue, Item, Lesson
 from maaya.learner import LearnerState
 from maaya.script import Script
+from maaya.strings import LEVEL_NAME, NARRATOR
 
 GAP = timing.GAP
 WITHIN_LESSON = [30.0, 120.0, 300.0, 700.0]
@@ -36,13 +37,15 @@ class Plan:
 class _Timeline:
     """Script builder that keeps a running duration estimate."""
 
-    def __init__(self, script: Script):
+    def __init__(self, script: Script, lang: str = "en"):
         self.s = script
         self.t = 0.0
+        self.lang = lang
+        self.S = NARRATOR[lang]
 
     def narrator(self, text: str, note: str = "") -> None:
         self.s.narrator(text, note)
-        self.t += timing.narrator_seconds(text) + GAP
+        self.t += timing.narrator_seconds(text, self.lang) + GAP
 
     def maya(self, text: str, rate: float = 1.0, note: str = "", slice_of: str = "") -> None:
         self.s.maya(text, rate, note, slice_of=slice_of)
@@ -70,7 +73,7 @@ def _dialogue(tl: _Timeline, d: Dialogue, rate: float = 1.0, translate: bool = F
     """Play a dialogue. With translate=True the narrator gives each line's meaning first."""
     for line in d.lines:
         if translate:
-            tl.narrator(line.en, note=f"{d.id}:{line.speaker}:en")
+            tl.narrator(line.meaning(tl.lang), note=f"{d.id}:{line.speaker}:meaning")
         tl.maya(line.yua, rate, note=f"{d.id}:{line.speaker}")
         tl.pause(0.6 if rate == 1.0 else 1.0)
 
@@ -87,51 +90,52 @@ def _introduce(tl: _Timeline, it: Item, ordinal: int) -> None:
     """English meaning first, then the Maya; then sound-by-sound backward buildup
     (fragments are cut from the full-phrase audio at render time), then the
     first anticipation prompt."""
-    en = it.en.rstrip(".")
-    lead = "Now" if ordinal else "Let's begin with"
-    tl.narrator(f"{lead} how to say, {en}. Listen.", note=f"{it.id}:intro")
+    S, lang = tl.S, tl.lang
+    meaning = it.meaning(lang).rstrip(".")
+    tl.narrator((S["next_item"] if ordinal else S["first_item"]).format(meaning=meaning), note=f"{it.id}:intro")
     tl.maya(it.yua, note=it.id)
     tl.pause(1.2)
-    if it.literal:
-        tl.narrator(f"Word for word, that's, {it.literal}.")
-    if it.note:
-        tl.narrator(it.note)
+    if it.literal_in(lang):
+        tl.narrator(S["word_for_word"].format(literal=it.literal_in(lang)))
+    if it.note_in(lang):
+        tl.narrator(it.note_in(lang))
     chunks = it.syllables or [it.yua]
-    if len(chunks) > 1:
-        tl.narrator("We'll build it up from the end, one sound at a time. Listen and repeat.")
-    else:
-        tl.narrator("Listen and repeat.")
+    tl.narrator(S["build_up"] if len(chunks) > 1 else S["listen_repeat"])
+    glosses = it.glosses_in(lang)
     for i, c in enumerate(chunks):
         last = i == len(chunks) - 1
         rate = 1.0 if last else SLOW
         slice_of = "" if c.lower() == it.yua.lower() else it.yua
-        if gloss := it.glosses.get(c):  # narrator never says Maya: meaning first, then the voice
+        if gloss := glosses.get(c):  # narrator never says Maya: meaning first, then the voice
             tl.narrator(f"{gloss[0].upper() + gloss[1:]}.", note=f"{it.id}:gloss")
         tl.maya(c, rate, note=f"{it.id}:build{i}", slice_of=slice_of)
         tl.repeat(c, rate)
         tl.maya(c, rate, note=f"{it.id}:build{i}", slice_of=slice_of)
         tl.repeat(c, rate)
-    tl.narrator(f"Say, {en}.", note=f"{it.id}:s2")
+    tl.narrator(S["say"].format(meaning=meaning), note=f"{it.id}:s2")
     tl.response(it.yua)
     _answer(tl, it.yua, f"{it.id}:answer")
 
 
 def _recall(tl: _Timeline, it: Item, stage: int, k: int) -> None:
     """stage 2: how do you say; 3: situational cue; 4: transform (falls back to 3/2)."""
+    S, lang = tl.S, tl.lang
+    meaning = it.meaning(lang).rstrip(".")
+    cues = it.cues_in(lang)
     if stage >= 4 and it.transforms:
         tr = it.transforms[k % len(it.transforms)]
-        tl.narrator(f"How do you say, {it.en.rstrip('.')}?", note=f"{it.id}:s4a")
+        tl.narrator(S["how_do_you_say"].format(meaning=meaning), note=f"{it.id}:s4a")
         tl.response(it.yua)
         tl.maya(it.yua, note=it.id)
         tl.pause(0.6)
-        tl.narrator(tr.prompt_en, note=f"{it.id}:s4b")
+        tl.narrator(tr.prompt(lang), note=f"{it.id}:s4b")
         tl.response(tr.yua)
         _answer(tl, tr.yua, f"{it.id}:transform")
         return
-    if stage >= 3 and it.cues:
-        tl.narrator(it.cues[k % len(it.cues)], note=f"{it.id}:s3")
+    if stage >= 3 and cues:
+        tl.narrator(cues[k % len(cues)], note=f"{it.id}:s3")
     else:
-        prompt = f"How do you say, {it.en.rstrip('.')}?" if k % 2 == 0 else f"Say, {it.en.rstrip('.')}."
+        prompt = S["how_do_you_say"].format(meaning=meaning) if k % 2 == 0 else S["say"].format(meaning=meaning)
         tl.narrator(prompt, note=f"{it.id}:s2")
     tl.response(it.yua)
     _answer(tl, it.yua, it.id)
@@ -139,9 +143,9 @@ def _recall(tl: _Timeline, it: Item, stage: int, k: int) -> None:
 
 def _reconstruct(tl: _Timeline, d: Dialogue) -> None:
     """Learner produces each line of the dialogue from its English."""
-    tl.narrator(f"{d.setting_en} This time you say each line. I'll give you the meaning.", note=f"{d.id}:reconstruct")
+    tl.narrator(tl.S["reconstruct"].format(setting=d.setting(tl.lang)), note=f"{d.id}:reconstruct")
     for line in d.lines:
-        tl.narrator(line.en, note=f"{d.id}:{line.speaker}:cue")
+        tl.narrator(line.meaning(tl.lang), note=f"{d.id}:{line.speaker}:cue")
         tl.response(line.yua)
         tl.maya(line.yua, note=f"{d.id}:{line.speaker}")
         tl.pause(0.8)
@@ -149,7 +153,7 @@ def _reconstruct(tl: _Timeline, d: Dialogue) -> None:
 
 def _dialogue_repeat(tl: _Timeline, d: Dialogue) -> None:
     """Listen and repeat each dialogue line, slowly then at speed."""
-    tl.narrator("Now repeat each line of the conversation after the speaker.", note=f"{d.id}:repeat")
+    tl.narrator(tl.S["repeat_lines"], note=f"{d.id}:repeat")
     for line in d.lines:
         tl.maya(line.yua, SLOW, note=f"{d.id}:{line.speaker}:slow")
         tl.repeat(line.yua, SLOW)
@@ -158,7 +162,7 @@ def _dialogue_repeat(tl: _Timeline, d: Dialogue) -> None:
 
 
 def _repeat_round(tl: _Timeline, items: list[Item]) -> None:
-    tl.narrator("Listen and repeat each phrase, first slowly, then at normal speed.")
+    tl.narrator(tl.S["repeat_round"])
     for it in items:
         tl.maya(it.yua, SLOW, note=f"{it.id}:slow")
         tl.repeat(it.yua, SLOW)
@@ -169,31 +173,27 @@ def _repeat_round(tl: _Timeline, items: list[Item]) -> None:
 # ---------------------------------------------------------------- planner
 
 
-def plan_lesson(lesson: Lesson, prior: dict[str, Item], state: LearnerState, *, level_name: str = "Level 1", target_seconds: float = 1800.0) -> Plan:
-    script = Script(lesson_id=f"L1-{lesson.number:02d}", title=f"Maaya T'aan {level_name} – Lesson {lesson.number}: {lesson.title}")
-    tl = _Timeline(script)
+def plan_lesson(lesson: Lesson, prior: dict[str, Item], state: LearnerState, *, lang: str = "en", target_seconds: float = 1800.0) -> Plan:
+    level_name = LEVEL_NAME[lang]
+    lesson_word = {"en": "Lesson", "es": "Lección"}[lang]
+    script = Script(lesson_id=f"L1-{lesson.number:02d}", title=f"Maaya T'aan {level_name} – {lesson_word} {lesson.number}: {lesson.title_in(lang)}")
+    tl = _Timeline(script, lang)
+    S = tl.S
 
     # intro + opening --------------------------------------------------
-    tl.narrator(f"This is Maaya T'aan, {level_name}, lesson {lesson.number}.")
+    tl.narrator(S["intro"].format(level=level_name, n=lesson.number))
     if lesson.number == 1:
-        tl.narrator("Maaya T'aan is Yucatec Maya, the language of the Yucatán Peninsula, spoken today by nearly a million people. "
-                    "Listen to this conversation between two speakers. Don't try to understand it yet, just listen to the sounds.")
-    tl.narrator(f"{lesson.opening.setting_en}")
+        tl.narrator(S["l1_welcome"])
+    tl.narrator(lesson.opening.setting(lang))
     _dialogue(tl, lesson.opening)
     tl.pause(1.0)
-    if lesson.number == 1:
-        tl.narrator("In the next thirty minutes you're not only going to understand this conversation, you're going to be able to take part in one like it yourself. "
-                    "Yucatec Maya has some sounds English doesn't have. Don't worry about how anything is spelled. Just listen, and imitate what you hear. "
-                    "Whenever you hear a pause, that's your turn. Say the words out loud, in a full voice, even if you're not sure. "
-                    "Listen to the conversation once more.")
-    else:
-        tl.narrator("Listen to it once more.")
+    tl.narrator(S["l1_method"] if lesson.number == 1 else S["once_more"])
     _dialogue(tl, lesson.opening)
     tl.pause(1.0)
-    tl.narrator("Now, listen again, and this time you'll hear the meaning of each line first.")
+    tl.narrator(S["with_meaning"])
     _dialogue(tl, lesson.opening, rate=SLOW, translate=True)
     tl.pause(1.0)
-    tl.narrator("By the end of this lesson you'll be able to say every line yourself. Let's begin.")
+    tl.narrator(S["by_end"])
 
     # body: event-driven interleave -----------------------------------
     reviews = [(iid, st) for iid, st in state.due(lesson.number) if iid in prior]
@@ -240,8 +240,8 @@ def plan_lesson(lesson: Lesson, prior: dict[str, Item], state: LearnerState, *, 
             it = new_queue.pop(0)
             _introduce(tl, it, len(lesson.items) - len(new_queue) - 1)
             push(it.id, 2, WITHIN_LESSON[0], 0)
-            if not grammar_said and lesson.grammar_note and len(new_queue) == len(lesson.items) // 2:
-                tl.narrator(lesson.grammar_note, note="grammar")
+            if not grammar_said and lesson.grammar_note_in(lang) and len(new_queue) == len(lesson.items) // 2:
+                tl.narrator(lesson.grammar_note_in(lang), note="grammar")
                 grammar_said = True
             continue
         if reviews:
@@ -260,8 +260,8 @@ def plan_lesson(lesson: Lesson, prior: dict[str, Item], state: LearnerState, *, 
         if k + 1 < len(WITHIN_LESSON):
             push(iid, min(3, stage + 1), WITHIN_LESSON[k + 1] - WITHIN_LESSON[k], k + 1)
 
-    if lesson.grammar_note and not grammar_said:
-        tl.narrator(lesson.grammar_note, note="grammar")
+    if lesson.grammar_note_in(lang) and not grammar_said:
+        tl.narrator(lesson.grammar_note_in(lang), note="grammar")
 
     # remaining fillers until the lesson is long enough --------------------
     while fillers and tl.t + closing_cost < target_seconds - 60:
@@ -277,8 +277,8 @@ def plan_lesson(lesson: Lesson, prior: dict[str, Item], state: LearnerState, *, 
 
 
     # closing ----------------------------------------------------------
-    tl.narrator(f"Now listen to a whole conversation. {closing.setting_en} See how much you understand.")
+    tl.narrator(S["closing"].format(setting=closing.setting(lang)))
     _dialogue(tl, closing)
-    tl.narrator(f"This is the end of lesson {lesson.number}.")
+    tl.narrator(S["end"].format(n=lesson.number))
 
     return Plan(script=script, new_items=[i.id for i in lesson.items], reviewed=reviewed, estimated_seconds=tl.t)

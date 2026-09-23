@@ -30,7 +30,7 @@ def _state():
     return LearnerState.load(STATE_PATH[0])
 
 
-def _plan(level: str, lesson: int):
+def _plan(level: str, lesson: int, lang: str = "en"):
     from maaya.planner import plan_lesson
 
     lv = _level(level)
@@ -38,14 +38,14 @@ def _plan(level: str, lesson: int):
     if les is None:
         raise typer.BadParameter(f"no lesson {lesson} in {level}")
     prior = {i.id: i for i in lv.items_before(lesson)}
-    return plan_lesson(les, prior, _state(), level_name=level.replace("level", "Level "))
+    return plan_lesson(les, prior, _state(), lang=lang)
 
 
 @app.command()
-def plan(lesson: int, level: str = "level1"):
+def plan(lesson: int, level: str = "level1", lang: str = "en"):
     """Write the timed script for a lesson to out/scripts/ and print its estimated length."""
-    p = _plan(level, lesson)
-    path = OUT / "scripts" / f"{p.script.lesson_id}.json"
+    p = _plan(level, lesson, lang)
+    path = OUT / "scripts" / f"{p.script.lesson_id}.{lang}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(p.script.model_dump_json(indent=1))
     n_seg = len(p.script.segments)
@@ -53,15 +53,19 @@ def plan(lesson: int, level: str = "level1"):
 
 
 @app.command()
-def render(lesson: int, level: str = "level1", narrator_voice: str = "af_heart",
+def render(lesson: int, level: str = "level1", lang: str = "en", narrator_voice: str = "",
            rescore: bool = typer.Option(True, help="best-of-N Maya synthesis picked by MMS-ASR agreement")):
-    """Plan and render a lesson to out/lessons/<id>.mp3 (TTS results are cached)."""
+    """Plan and render a lesson to out/lessons/<id>.<lang>.mp3 (TTS results are cached)."""
+    from maaya.strings import NARRATOR_VOICE
+
+    lang_code, default_voice = NARRATOR_VOICE[lang]
+    narrator_voice = narrator_voice or default_voice
     from maaya.render import Voices, render as _render
     from maaya.tts.base import CachedTTS
     from maaya.tts.kokoro import KokoroNarrator
     from maaya.tts.mms import MMSMaya
 
-    p = _plan(level, lesson)
+    p = _plan(level, lesson, lang)
     maya_voice = MMSMaya()
     if rescore:
         from maaya.tts.rescore import RescoredMaya
@@ -72,13 +76,13 @@ def render(lesson: int, level: str = "level1", narrator_voice: str = "af_heart",
 
     from maaya.export import meaning_lookup, write_reference
 
-    voices = Voices(narrator=CachedTTS(KokoroNarrator(narrator_voice), CACHE), maya=CachedTTS(maya_voice, CACHE), aligner=Aligner(get_asr(), CACHE))
+    voices = Voices(narrator=CachedTTS(KokoroNarrator(narrator_voice, lang_code), CACHE), maya=CachedTTS(maya_voice, CACHE), aligner=Aligner(get_asr(), CACHE))
     lv = _level(level)
     les = next(l for l in lv.lessons if l.number == lesson)
     prior = {i.id: i for i in lv.items_before(lesson)}
-    out, clips = _render(p.script, voices, OUT / "lessons" / f"{p.script.lesson_id}.mp3", album=f"Maaya T'aan {level}", track=lesson,
-                         cover=ROOT / "assets/cover.jpg", meanings=meaning_lookup(les, prior))
-    write_reference(les, prior, OUT / "lessons", clips)
+    out, clips = _render(p.script, voices, OUT / "lessons" / f"{p.script.lesson_id}.{lang}.mp3", album=f"Maaya T'aan {level} ({lang})", track=lesson,
+                         cover=ROOT / "assets/cover.jpg", meanings=meaning_lookup(les, prior, lang), clips_dir=OUT / "lessons" / f"{p.script.lesson_id}.clips")
+    write_reference(les, prior, OUT / "lessons", clips, lang)
     typer.echo(f"wrote {out} (+ .json timeline, .lesson.json reference, {len(clips)} clips)")
 
 
@@ -121,8 +125,8 @@ def attest(text: str):
 
 
 @app.command()
-def lint(level: str = "level1"):
-    """Validate every lesson: attestation, item counts, duplicate ids, estimated length."""
+def lint(level: str = "level1", lang: str = "en"):
+    """Validate every lesson: attestation, item counts, duplicate ids, estimated length; with --lang es, missing Spanish."""
     from maaya.attest import Attester
     from maaya.learner import LearnerState
     from maaya.planner import plan_lesson
@@ -161,7 +165,11 @@ def lint(level: str = "level1"):
         if not 6 <= len(les.items) <= 12:
             typer.echo(f"L{les.number:02d} COUNT   {len(les.items)} new items (want 6-12)")
             problems += 1
-        est = plan_lesson(les, {i.id: i for i in lv.items_before(les.number)}, LearnerState()).estimated_seconds / 60
+        if lang == "es":
+            for f in les.missing_es():
+                typer.echo(f"L{les.number:02d} NO-ES   {f}")
+                problems += 1
+        est = plan_lesson(les, {i.id: i for i in lv.items_before(les.number)}, LearnerState(), lang=lang).estimated_seconds / 60
         if not 26 <= est <= 34:
             typer.echo(f"L{les.number:02d} LENGTH  ~{est:.1f} min (fresh learner estimate)")
             problems += 1
@@ -187,8 +195,8 @@ def draft(lesson: int, level: str = "level1", force: bool = False):
 
 
 @app.command()
-def build(level: str = "level1", upto: int = 0, rescore: bool = True):
-    """Render every lesson in order for a fresh learner (the public course) and build site/."""
+def build(level: str = "level1", upto: int = 0, rescore: bool = True, langs: str = "en,es"):
+    """Render every lesson in order for a fresh learner (the public course), in each language, and build site/."""
     from maaya.learner import LearnerState
     from maaya.site import build as _build
 
@@ -200,7 +208,8 @@ def build(level: str = "level1", upto: int = 0, rescore: bool = True):
     for les in lv.lessons:
         if upto and les.number > upto:
             break
-        render(les.number, level=level, rescore=rescore)
+        for lang in langs.split(","):
+            render(les.number, level=level, lang=lang, rescore=rescore)
         p = _plan(level, les.number)
         st = LearnerState.load(canonical)
         st.introduce(p.new_items, les.number)

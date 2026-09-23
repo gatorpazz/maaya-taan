@@ -56,6 +56,15 @@ uv run maya complete 3          # after listening; add --failed item_id for anyt
 uv run maya feed --base-url http://<your-mac>:8000 && python -m http.server -d out 8000
 ```
 
+## Two teaching languages
+
+The course is taught in English or Spanish; the Maya is identical. Each lesson renders once per language
+(`L1-01.en.mp3`, `L1-01.es.mp3`) sharing the same Maya clips; the narrator copy lives in `maaya/strings.py`
+and the Spanish teaching fields sit next to the English ones in the lesson YAML (`es`, `note_es`, `cues_es`, ...).
+`maya lint --lang es` lists anything still missing Spanish; the app falls back to English audio for a lesson
+that has no Spanish yet. The pronunciation guide is written separately for each audience (`pwa/guide.en.json`,
+`pwa/guide.es.json`), not translated.
+
 ## Writing lessons
 
 ```bash

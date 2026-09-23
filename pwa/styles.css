@@ -176,3 +176,7 @@ p { margin: 0.4rem 0 0.8rem; max-width: 60ch; }
 .share { display: inline-block; width: 0.9em; height: 1.05em; vertical-align: -0.15em; margin-right: 0.15em;
   background: currentColor; -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'><path d='M10 1l5 5h-3.5v9h-3V6H5zM3 10h4v2H5v10h10V12h-2v-2h4v14H3z'/></svg>") center/contain no-repeat;
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'><path d='M10 1l5 5h-3.5v9h-3V6H5zM3 10h4v2H5v10h10V12h-2v-2h4v14H3z'/></svg>") center/contain no-repeat; }
+
+.langs { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; margin-left: 0.3rem; }
+.lang { background: none; border: 0; padding: 0.15rem 0.55rem; color: var(--ink-3); cursor: pointer; font-size: 0.85rem; font-weight: 700; }
+.lang[aria-pressed="true"] { background: var(--blue); color: white; }

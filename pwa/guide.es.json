@@ -1,0 +1,28 @@
+{
+  "howto": [
+    "Reproduce la lección y sigue el texto. La línea que se está diciendo queda resaltada; toca cualquier línea para ir a ella.",
+    "Cuando veas Tu turno, di la frase en voz alta, con voz plena, antes de que llegue la respuesta. No la esperes.",
+    "Oculta la escritura maya cuando una frase ya te suene familiar. Leer es una muleta; la meta es oír y hablar.",
+    "Termina la lección al final de la transcripción y marca lo que se te olvidó. Esas frases vuelven antes en las próximas lecciones."
+  ],
+  "sounds": [
+    {"s": "k'  p'  t'  ch'  ts'", "d": "Consonantes glotalizadas: se dicen con un pequeño estallido desde la garganta, como una tosecita sobre la consonante. El español no las tiene; k' y k distinguen palabras.", "ex": "k'aaba' (nombre), k'iin (día)"},
+    {"s": "'", "d": "El cierre glotal solo: un corte en la garganta, como el que separa las dos vocales cuando dices a-a negando con la cabeza. Muy común al final de palabra.", "ex": "Ma'alob (bien), na' (mamá)"},
+    {"s": "aa  ee  ii  oo  uu", "d": "Vocales largas: duran más o menos el doble que una vocal sencilla, con tono bajo y parejo. En español no alargamos las vocales; aquí sí importa.", "ex": "beel (camino), jaaj (sí)"},
+    {"s": "áa  ée  íi  óo  úu", "d": "Vocales largas con tono alto que baja. El maya yucateco tiene tono: sáamal y saamal son palabras distintas.", "ex": "sáamal (mañana), táan (marca de progresivo)"},
+    {"s": "a'  e'  i'  o'  u'", "d": "Una vocal cortada por un cierre glotal, a menudo rearticulada: a-'a.", "ex": "Ma'alob, k'aaba'e'"},
+    {"s": "x", "d": "Suena como la sh del inglés, o como la x de Xola o Uxmal.", "ex": "Bix (cómo), xook (estudiar)"},
+    {"s": "j", "d": "Como la j del español, pero más suave, aspirada.", "ex": "jaaj (sí), jeel (otro)"},
+    {"s": "ch", "d": "Como la ch del español.", "ex": "chiich (abuela)"},
+    {"s": "ts", "d": "Como en tsunami, al principio de palabra.", "ex": "ts'o'ok (ya)"},
+    {"s": "w", "d": "Como la hu de huevo. Aparece delante de vocal después de in, a, u: in wíits'in.", "ex": "wotoch (casa)"}
+  ],
+  "patterns": [
+    {"t": "in, a, u", "d": "Mi, tu, su. Van delante de la palabra: in k'aaba', mi nombre; a beel, tu camino; u yotoch, su casa."},
+    {"t": "táan in bin", "d": "Táan marca algo que está pasando ahora. Táan in bin, me estoy yendo. Táan a bin, te estás yendo."},
+    {"t": "túun", "d": "Entonces, o pues. Cierra muchas frases: Ma'alob túun, bueno, está bien."},
+    {"t": "Tak", "d": "Hasta. Tak sáamal, hasta mañana. Tak tu jeel k'iin, hasta otro día."},
+    {"t": "Bix", "d": "Cómo. Bix a beel, cómo está tu camino, cómo estás. Bix a k'aaba', cómo es tu nombre, cómo te llamas."}
+  ],
+  "spelling": "La escritura sigue la norma INALI de 2014 que se usa en toda la península. Los libros antiguos usan la ortografía colonial (c por k, dz por ts', cħ por ch'); los sonidos son los mismos."
+}

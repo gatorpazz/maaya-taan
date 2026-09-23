@@ -31,16 +31,19 @@ Hard rules:
 8. Opening dialogue: 5-8 lines between A and B, natural, using new and previously taught items. Closing dialogue: a variation on the same scene.
 9. `en` is natural English, not a gloss. `literal` is the word-by-word gloss when it helps.
 10. `grammar_note` is one sentence, spoken once, pointing at a pattern the learner has just heard.
+11. The course is also taught in Spanish. For every English teaching field give the Spanish counterpart, written for a Spanish speaker rather than translated word by word: `es` (use the corpus Spanish for attested phrases), `literal_es`, `note_es`, `cues_es`, `glosses_es`, `prompt_es`, `setting_es`, line `es`, `title_es`, `grammar_note_es`.
 
 Output only a YAML document in a ```yaml fence, matching this shape exactly:
 
 number: <int>
 title: <string>
-opening: {id: lNN_open, setting_en: <one sentence>, lines: [{speaker: A|B, yua: ..., en: ...}, ...]}
+title_es: <string>
+opening: {id: lNN_open, setting_en: <one sentence>, setting_es: ..., lines: [{speaker: A|B, yua: ..., en: ..., es: ...}, ...]}
 items:
-  - {id: snake_case, yua: ..., en: ..., es: ..., literal: ..., syllables: [...], note: ..., cues: [...], transforms: [{prompt_en: ..., yua: ...}]}
+  - {id: snake_case, yua: ..., en: ..., es: ..., literal: ..., literal_es: ..., syllables: [...], glosses: {...}, glosses_es: {...}, note: ..., note_es: ..., cues: [...], cues_es: [...], transforms: [{prompt_en: ..., prompt_es: ..., yua: ...}]}
 grammar_note: <string>
-closing: {id: lNN_close, setting_en: ..., lines: [...]}
+grammar_note_es: <string>
+closing: {id: lNN_close, setting_en: ..., setting_es: ..., lines: [...]}
 needs_review: [<Maya strings you wanted but could not attest>]
 """
 
