@@ -42,7 +42,9 @@ uv run maya deploy            # publish site/ to Cloudflare Pages (npx wrangler 
 (`contact_url`, `recordings_url`, `repo_url`). The About page carries the source attributions the licenses
 require; keep it if you fork this.
 
-Hosting notes: a lesson is about 14 MB (64 kbps mono), under Cloudflare Pages' 25 MB per-file cap; 30 lessons is ~420 MB. Over https the service worker caches the app shell and
+Hosting: Cloudflare Worker static assets (`wrangler.jsonc`). `worker.js` adds HTTP byte-range support for audio, which
+Cloudflare's asset serving lacks and iOS Safari requires for playback. A lesson is about 14 MB (64 kbps mono),
+under the 25 MB per-file cap; 30 lessons is ~420 MB. Live: https://maaya-taan.gatorpazz.workers.dev Over https the service worker caches the app shell and
 lesson data, so opened lessons keep working offline; audio streams by byte range.
 
 ## Author loop (your own adaptive lessons)

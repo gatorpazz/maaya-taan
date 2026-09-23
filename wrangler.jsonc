@@ -1,7 +1,13 @@
 {
-  // Cloudflare: the built static site in site/ served as Worker static assets.
-  // Deploy with `uv run maya deploy` (runs `npx wrangler deploy`).
+  // Cloudflare: site/ served as Worker static assets, with worker.js adding
+  // byte-range support for audio. Deploy with `uv run maya deploy`.
   "name": "maaya-taan",
+  "main": "worker.js",
   "compatibility_date": "2026-09-01",
-  "assets": { "directory": "./site" }
+  "assets": {
+    "directory": "./site",
+    "binding": "ASSETS",
+    // audio must go through the Worker (range handling); everything else is served straight from assets
+    "run_worker_first": ["/lessons/*.mp3", "/lessons/*/*.mp3"]
+  }
 }
