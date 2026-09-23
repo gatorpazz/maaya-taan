@@ -265,14 +265,14 @@ def serve(host: str = "0.0.0.0", port: int = 8000):
 
 @app.command()
 def deploy(project: str = "maaya-taan"):
-    """Publish site/ to Cloudflare Pages with wrangler (run `npx wrangler login` once first)."""
+    """Publish site/ to Cloudflare as Worker static assets (run `npx wrangler login` once first)."""
     import subprocess
 
     from maaya.site import SITE
 
     if not SITE.exists():
         raise typer.BadParameter("no site/ yet; run `maya build` first")
-    r = subprocess.run(["npx", "--yes", "wrangler", "pages", "deploy", str(SITE), "--project-name", project, "--commit-dirty=true"])
+    r = subprocess.run(["npx", "--yes", "wrangler", "deploy", "--name", project], cwd=str(ROOT))
     raise typer.Exit(code=r.returncode)
 
 

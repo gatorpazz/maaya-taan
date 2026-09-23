@@ -1,0 +1,7 @@
+{
+  // Cloudflare: the built static site in site/ served as Worker static assets.
+  // Deploy with `uv run maya deploy` (runs `npx wrangler deploy`).
+  "name": "maaya-taan",
+  "compatibility_date": "2026-09-01",
+  "assets": { "directory": "./site" }
+}
