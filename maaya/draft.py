@@ -24,7 +24,7 @@ Hard rules:
 1. Every Maya string you output (dialogue lines, items, buildup chunks, transforms) must be taken verbatim from the ATTESTED PHRASES list, or be a chunk of one, or a recombination whose every word appears there. Never invent Maya. If you need a phrase that is not in the list, leave it out and mention it under `needs_review` instead.
 2. Use the modern INALI orthography exactly as in the list: apostrophes for glottalization (k', p', t', ch', ts', vowel'), doubled vowels for length, acute accents for high tone.
 3. A lesson has 8 to 10 new items. Prefer short, high-frequency, conversationally useful phrases. Reuse items from PREVIOUSLY TAUGHT in dialogues freely, but do not re-teach them.
-4. `syllables` is the backward-buildup list in speaking order, ending with the full phrase, e.g. ["beel", "a beel", "Bix a beel"]. Build from the last word backwards; chunks may be partial words for long words.
+4. `syllables` is the backward-buildup list in speaking order, ending with the full phrase, e.g. ["beel", "a beel", "Bix a beel"]. Build from the last word backwards; chunks may be partial words for long words. `glosses` maps a chunk or a word of the phrase to its meaning; chunk glosses are spoken during the buildup, word glosses are shown in the app.
 5. `note` is one short organic hint the narrator says once (a sound, a literal meaning, a pattern). No grammar tables, no linguistic jargon beyond "prefix" or "ending".
 6. `cues` are 1-2 situational prompts for recall, second person, e.g. "You meet your neighbor in the morning. Ask how she is."
 7. `transforms` (optional, 0-1 per item) ask the learner to change one thing (person, object) and give the attested answer.
@@ -89,22 +89,42 @@ ATTESTED PHRASES (id, Maya, Spanish) — the only Maya you may use:
 Write lesson {number}."""
 
 
-def draft(number: int, taught: list[Item]) -> tuple[Lesson, list[str], str]:
-    """Returns (validated lesson with attestation filled in, needs_review list, raw yaml)."""
+def _ask_claude_code(system: str, prompt: str) -> str:
+    """Run the prompt through the Claude Code CLI (`claude -p`), which uses your
+    Claude subscription rather than API billing."""
+    import shutil
+    import subprocess
+
+    exe = shutil.which("claude")
+    if not exe:
+        raise RuntimeError("claude CLI not found; install Claude Code or set ANTHROPIC_API_KEY to use the API instead")
+    r = subprocess.run([exe, "-p", "--output-format", "text", "--system-prompt", system, prompt], capture_output=True, text=True, timeout=900)
+    if r.returncode != 0:
+        raise RuntimeError(f"claude -p failed: {r.stderr.strip()[:500]}")
+    return r.stdout
+
+
+def _ask_api(system: str, prompt: str) -> str:
     import anthropic
 
     client = anthropic.Anthropic()
-    with client.messages.stream(
-        model=MODEL,
-        max_tokens=32000,
-        output_config={"effort": "high"},
-        system=SYSTEM,
-        messages=[{"role": "user", "content": build_prompt(number, taught)}],
-    ) as stream:
+    with client.messages.stream(model=MODEL, max_tokens=32000, output_config={"effort": "high"}, system=system,
+                                messages=[{"role": "user", "content": prompt}]) as stream:
         msg = stream.get_final_message()
     if msg.stop_reason == "refusal":
         raise RuntimeError(f"model refused: {msg.stop_details}")
-    text = "".join(b.text for b in msg.content if b.type == "text")
+    return "".join(b.text for b in msg.content if b.type == "text")
+
+
+def draft(number: int, taught: list[Item], backend: str = "auto") -> tuple[Lesson, list[str], str]:
+    """Returns (validated lesson with attestation filled in, needs_review list, raw yaml).
+    backend: "claude" (Claude Code CLI, subscription), "api" (Anthropic API key), or "auto"."""
+    import os
+
+    if backend == "auto":
+        backend = "api" if os.environ.get("ANTHROPIC_API_KEY") else "claude"
+    ask = _ask_api if backend == "api" else _ask_claude_code
+    text = ask(SYSTEM, build_prompt(number, taught))
     m = re.search(r"```yaml\s*(.*?)```", text, re.S)
     raw = m.group(1) if m else text
     data = yaml.safe_load(raw)

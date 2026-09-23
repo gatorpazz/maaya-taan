@@ -154,9 +154,9 @@ def lint(level: str = "level1", lang: str = "en"):
                 if c.lower() not in i.yua.lower():
                     typer.echo(f"L{les.number:02d} CHUNK   {i.id}: {c!r} is not part of {i.yua!r}")
                     problems += 1
-            for g in i.glosses:
-                if g not in i.syllables:
-                    typer.echo(f"L{les.number:02d} GLOSS   {i.id}: gloss for {g!r} but no such chunk")
+            for g in list(i.glosses) + list(i.glosses_es):  # a gloss keys a buildup chunk or a word of the phrase
+                if g.lstrip("-").lower() not in i.yua.lower():
+                    typer.echo(f"L{les.number:02d} GLOSS   {i.id}: gloss for {g!r} is not part of {i.yua!r}")
                     problems += 1
             if i.id in seen:
                 typer.echo(f"L{les.number:02d} DUP     item {i.id} already taught")
@@ -178,7 +178,8 @@ def lint(level: str = "level1", lang: str = "en"):
 
 
 @app.command()
-def draft(lesson: int, level: str = "level1", force: bool = False):
+def draft(lesson: int, level: str = "level1", force: bool = False,
+          backend: str = typer.Option("auto", help="claude (Claude Code CLI, your subscription), api (ANTHROPIC_API_KEY), or auto")):
     """Draft lessonNN.yaml with Claude from corpus-attested phrases. Review the file, then `maya lint`."""
     from maaya.draft import draft as _draft, to_yaml
 
@@ -186,7 +187,7 @@ def draft(lesson: int, level: str = "level1", force: bool = False):
     if path.exists() and not force:
         raise typer.BadParameter(f"{path} exists; pass --force to overwrite")
     lv = _level(level)
-    les, needs_review, _ = _draft(lesson, lv.items_before(lesson))
+    les, needs_review, _ = _draft(lesson, lv.items_before(lesson), backend=backend)
     path.write_text(to_yaml(les), encoding="utf-8")
     flagged = [i.id for i in les.items if "REVIEW" in i.attested_by]
     typer.echo(f"wrote {path}: {len(les.items)} items, {len(flagged)} flagged REVIEW {flagged}")

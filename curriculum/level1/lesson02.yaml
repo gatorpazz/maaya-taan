@@ -1,0 +1,374 @@
+number: 2
+title: Good morning, good night
+title_es: Buenos días, buenas noches
+opening:
+  id: l02_open
+  setting_en: Early morning at home; a young man greets his mother in the kitchen before heading out.
+  setting_es: Temprano en la mañana en casa; un joven saluda a su mamá en la cocina antes de salir.
+  lines:
+  - speaker: A
+    yua: Diiyáas na'
+    en: Good morning, Mom.
+    es: Buenos días mamá.
+    attested_by:
+    - YUAES0006965
+  - speaker: B
+    yua: Bix túun
+    en: Hey, how's it going?
+    es: ¿Hola, qué tal?
+    attested_by:
+    - YUAES0007001
+  - speaker: A
+    yua: Ma'alob. Bix a beel
+    en: Fine. How are you?
+    es: Bien. ¿Cómo estás?
+    attested_by:
+    - words
+  - speaker: B
+    yua: Ma'alob
+    en: Fine.
+    es: Bien.
+    attested_by:
+    - words
+  - speaker: A
+    yua: Tin bin na'
+    en: I'm off, Mom.
+    es: Ya me voy mamá.
+    attested_by:
+    - YUAES0007078
+  - speaker: B
+    yua: Ma'alob túun. Kanáantabaj
+    en: Alright then. Take care.
+    es: Bueno, está bien. Cuídate.
+    attested_by:
+    - words
+  - speaker: A
+    yua: Tak tu jeel k'iin na'
+    en: See you later, Mom.
+    es: Hasta luego mamá.
+    attested_by:
+    - YUAES0007031
+  - speaker: B
+    yua: Tak tu jeel k'iin
+    en: See you later.
+    es: Hasta luego.
+    attested_by:
+    - YUAES0007010
+items:
+- id: diiyaas_na
+  yua: Diiyáas na'
+  en: Good morning, Mom.
+  es: Buenos días mamá.
+  syllables:
+  - na'
+  - yáas na'
+  - Diiyáas na'
+  literal: days mom
+  literal_es: días mamá
+  glosses:
+    Diiyáas: good morning (from Spanish 'días')
+    na': mom
+  glosses_es:
+    Diiyáas: buenos días (del español 'días')
+    na': mamá
+  note: Diiyáas is Spanish 'días' stretched out Maya-style; the 'buenos' got dropped. Say the person's name or role right
+    after it.
+  note_es: Diiyáas es el 'días' del español, alargado a la maya; el 'buenos' se cayó. El parentesco va justo después.
+  cues:
+  - It's morning and your mother walks into the kitchen. Greet her.
+  - You wake up at your host family's house. Say good morning to the mother.
+  cues_es:
+  - Es de mañana y tu mamá entra en la cocina. Salúdala.
+  - Despiertas en casa de la familia que te hospeda. Dale los buenos días a la mamá.
+  attested_by:
+  - YUAES0006965
+  transforms:
+  - prompt_en: Now say good morning to Grandma.
+    prompt_es: Ahora dale los buenos días a la abuela.
+    yua: Diiyáas chiich
+    attested_by:
+    - YUAES0006956
+- id: diiyaas_yuum
+  yua: Diiyáas yuum
+  en: Good morning, Dad.
+  es: Buenos días papá.
+  syllables:
+  - yuum
+  - yáas yuum
+  - Diiyáas yuum
+  literal: days father
+  literal_es: días papá
+  glosses:
+    Diiyáas: good morning
+    yuum: dad, father
+  glosses_es:
+    Diiyáas: buenos días
+    yuum: papá
+  note: Yuum has a long 'uu' — hold it, like 'yoom'. It also means 'lord' or 'master', so it carries respect.
+  note_es: Yuum lleva la 'uu' larga; sostenla. También quiere decir 'señor' o 'dueño', así que lleva respeto.
+  cues:
+  - Your father is drinking coffee on the porch. Say good morning to him.
+  cues_es:
+  - Tu papá toma café en el portal. Dale los buenos días.
+  attested_by:
+  - YUAES0006966
+  transforms:
+  - prompt_en: Now good morning to your uncle.
+    prompt_es: Ahora buenos días a tu tío.
+    yua: Diiyáas tíiyo
+    attested_by:
+    - YUAES0006953
+- id: taardes_kiik
+  yua: Taardes kiik
+  en: Good afternoon, sister.
+  es: Buenas tardes hermana.
+  syllables:
+  - kiik
+  - des kiik
+  - Taardes kiik
+  literal: afternoons older-sister
+  literal_es: tardes hermana
+  glosses:
+    Taardes: good afternoon (from Spanish 'tardes')
+    kiik: older sister
+  glosses_es:
+    Taardes: buenas tardes (del español 'tardes')
+    kiik: hermana mayor
+  note: Kiik is 'sister', and it's how you address any woman a little older than you, related or not.
+  note_es: Kiik es 'hermana', y así se le habla a cualquier mujer un poco mayor que tú, sea pariente o no.
+  cues:
+  - It's mid-afternoon and your older sister comes home from the market. Greet her.
+  - A woman a bit older than you passes by after lunch. Say good afternoon.
+  cues_es:
+  - Es media tarde y tu hermana mayor vuelve del mercado. Salúdala.
+  - Una mujer un poco mayor que tú pasa después de comer. Dale las buenas tardes.
+  attested_by:
+  - YUAES0006980
+  transforms:
+  - prompt_en: Now good afternoon to your brother.
+    prompt_es: Ahora buenas tardes a tu hermano.
+    yua: Taardes suku'un
+    attested_by:
+    - YUAES0006979
+- id: nooches_sukuun
+  yua: Nooches suku'un
+  en: Good night, brother.
+  es: Buenas noches hermano.
+  syllables:
+  - ku'un
+  - suku'un
+  - ches suku'un
+  - Nooches suku'un
+  literal: nights older-brother
+  literal_es: noches hermano
+  glosses:
+    Nooches: good night (from Spanish 'noches')
+    suku'un: older brother
+  glosses_es:
+    Nooches: buenas noches (del español 'noches')
+    suku'un: hermano mayor
+  note: Suku'un has a small catch in the throat before the last 'un' — that's the apostrophe. Like kiik, it works for any
+    man a bit older than you.
+  note_es: Suku'un lleva un cortecito en la garganta antes del último 'un'; eso es el apóstrofo. Como kiik, sirve para cualquier
+    hombre un poco mayor que tú.
+  cues:
+  - It's late and your older brother is heading to bed. Say good night to him.
+  cues_es:
+  - Es tarde y tu hermano mayor se va a dormir. Dale las buenas noches.
+  attested_by:
+  - YUAES0006995
+  transforms:
+  - prompt_en: Now good night to Dad.
+    prompt_es: Ahora buenas noches a papá.
+    yua: Nooches yuum
+    attested_by:
+    - YUAES0006998
+- id: bix_tuun
+  yua: Bix túun
+  en: Hey, how's it going?
+  es: ¿Hola, qué tal?
+  syllables:
+  - túun
+  - Bix túun
+  literal: how then
+  literal_es: cómo entonces
+  glosses:
+    Bix: how
+    túun: then, so
+  glosses_es:
+    Bix: cómo
+    túun: entonces, pues
+  note: You already know túun from Ma'alob túun. Bix túun is a quick, casual 'so, how's it going?' between people who know
+    each other.
+  note_es: Ya conoces túun de Ma'alob túun. Bix túun es un '¿qué tal, pues?' rápido y de confianza.
+  cues:
+  - A friend walks up to you in the street. Greet him casually.
+  cues_es:
+  - Un amigo se te acerca en la calle. Salúdalo de manera casual.
+  attested_by:
+  - YUAES0007001
+- id: kanaantabaj
+  yua: Kanáantabaj
+  en: Take care.
+  es: Cuídate.
+  syllables:
+  - baj
+  - tabaj
+  - náantabaj
+  - Kanáantabaj
+  literal: guard-yourself
+  literal_es: cuida-te
+  glosses:
+    Kanáant: guard, look after
+    -abaj: yourself
+  glosses_es:
+    Kanáant: cuidar, vigilar
+    -abaj: a ti mismo
+  note: The ending -abaj means 'yourself'. The stress sits on the high-toned 'náan' in the middle.
+  note_es: La terminación -abaj significa 'a ti mismo'. El acento cae en el 'náan' del medio, con tono alto.
+  cues:
+  - Your friend is about to leave on a long trip. Tell him to take care.
+  - Your sister is walking out the door. Tell her to take care.
+  cues_es:
+  - Tu amigo está por salir de viaje. Dile que se cuide.
+  - Tu hermana sale por la puerta. Dile que se cuide.
+  attested_by:
+  - YUAES0007014
+- id: ka_jeelsabaj
+  yua: Ka je'elsabaj
+  en: Sleep well. Rest up.
+  es: Que descanses.
+  syllables:
+  - baj
+  - sabaj
+  - je'elsabaj
+  - Ka je'elsabaj
+  literal: that you-rest-yourself
+  literal_es: que descanses-te
+  glosses:
+    Ka: that, may
+    je'els: rest
+    -abaj: yourself
+  glosses_es:
+    Ka: que
+    je'els: descansar
+    -abaj: a ti mismo
+  note: 'Same -abaj ending as Kanáantabaj — ''yourself''. Ka in front turns it into a wish: ''may you rest''.'
+  note_es: 'La misma terminación -abaj que en Kanáantabaj: ''a ti mismo''. El Ka al inicio lo convierte en un deseo: ''que
+    descanses''.'
+  cues:
+  - Your grandmother says good night and heads to her hammock. Wish her a good rest.
+  cues_es:
+  - Tu abuela da las buenas noches y se va a su hamaca. Deséale que descanse.
+  attested_by:
+  - YUAES0007017
+- id: tin_bin_na
+  yua: Tin bin na'
+  en: I'm off, Mom.
+  es: Ya me voy mamá.
+  syllables:
+  - na'
+  - bin na'
+  - Tin bin na'
+  literal: I-go mom
+  literal_es: me-voy mamá
+  glosses:
+    Tin: I (right now)
+    bin: go
+    na': mom
+  glosses_es:
+    Tin: yo (ahora mismo)
+    bin: ir
+    na': mamá
+  note: Tin bin is a squeezed-together Táan in bin — the everyday, quick way to say it. Again, the kin word goes at the end.
+  note_es: 'Tin bin es Táan in bin comprimido: la forma rápida de todos los días. Otra vez, el parentesco va al final.'
+  cues:
+  - You're leaving for work. Tell your mother you're off.
+  cues_es:
+  - Sales al trabajo. Dile a tu mamá que ya te vas.
+  attested_by:
+  - YUAES0007078
+  transforms:
+  - prompt_en: Now tell your father you're off.
+    prompt_es: Ahora dile a tu papá que ya te vas.
+    yua: Tin bin yuum
+    attested_by:
+    - YUAES0007077
+- id: tak_saamal_tuun
+  yua: Tak sáamal túun
+  en: Alright, see you tomorrow.
+  es: Bueno, hasta mañana.
+  syllables:
+  - túun
+  - sáamal túun
+  - Tak sáamal túun
+  literal: until tomorrow then
+  literal_es: hasta mañana entonces
+  glosses:
+    Tak: until
+    sáamal: tomorrow
+    túun: then
+  glosses_es:
+    Tak: hasta
+    sáamal: mañana
+    túun: entonces
+  note: Túun tacked on the end softens it and wraps up the conversation — 'well then, see you tomorrow'.
+  note_es: 'El túun al final lo suaviza y cierra la conversación: ''bueno pues, hasta mañana''.'
+  cues:
+  - You've finished chatting with a neighbor at dusk. Wrap it up and say you'll see him tomorrow.
+  cues_es:
+  - Terminaste de platicar con un vecino al anochecer. Cierra y dile que hasta mañana.
+  attested_by:
+  - YUAES0007012
+  - YUAES0007028
+  transforms:
+  - prompt_en: Now say it to your mother.
+    prompt_es: Ahora díselo a tu mamá.
+    yua: Tak sáamal túun na'
+    attested_by:
+    - YUAES0007047
+grammar_note: Diiyáas, Taardes and Nooches are the Spanish 'días', 'tardes' and 'noches' borrowed into Maya with the vowels
+  stretched long, and the person you're greeting — na', yuum, kiik, suku'un — always comes right after them.
+grammar_note_es: Diiyáas, Taardes y Nooches son 'días', 'tardes' y 'noches' del español, tomados prestados por la maya con
+  las vocales alargadas, y la persona a la que saludas — na', yuum, kiik, suku'un — va siempre justo después.
+closing:
+  id: l02_close
+  setting_en: Late evening at the same house; a young woman says good night to her older brother before going to bed.
+  setting_es: Ya de noche en la misma casa; una joven le da las buenas noches a su hermano mayor antes de acostarse.
+  lines:
+  - speaker: A
+    yua: Nooches suku'un
+    en: Good night, brother.
+    es: Buenas noches hermano.
+    attested_by:
+    - YUAES0006995
+  - speaker: B
+    yua: Nooches kiik. Bix a beel
+    en: Good night, sister. How are you?
+    es: Buenas noches hermana. ¿Cómo estás?
+    attested_by:
+    - words
+  - speaker: A
+    yua: Ma'alob. Tak sáamal túun
+    en: Fine. Alright, see you tomorrow.
+    es: Bien. Bueno, hasta mañana.
+    attested_by:
+    - words
+  - speaker: B
+    yua: Ma'alob túun. Ka je'elsabaj
+    en: OK then. Sleep well.
+    es: Bueno, está bien. Que descanses.
+    attested_by:
+    - words
+  - speaker: A
+    yua: Tak sáamal suku'un
+    en: See you tomorrow, brother.
+    es: Hasta mañana hermano.
+    attested_by:
+    - YUAES0007111
+  - speaker: B
+    yua: Tak sáamal kiik
+    en: See you tomorrow, sister.
+    es: Hasta mañana hermana.
+    attested_by:
+    - YUAES0007112

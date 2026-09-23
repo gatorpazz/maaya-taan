@@ -345,6 +345,7 @@ function renderPhrases(panel) {
       ${it.literal ? `<div class="lit">${t("word_for_word")}: ${esc(it.literal)}</div>` : ""}
       ${it.note ? `<div class="note">${esc(it.note)}</div>` : ""}
       ${it.syllables?.length > 1 ? `<div class="chunks">${it.syllables.map((c) => `<button class="chunk" data-play="${esc(c)}" data-full="${esc(it.yua)}">${esc(c)}${it.glosses?.[c] ? `<span class="g">${esc(it.glosses[c])}</span>` : ""}</button>`).join("")}</div>` : ""}
+      ${Object.entries(it.glosses || {}).filter(([k]) => !it.syllables?.includes(k)).length ? `<div class="lit">${Object.entries(it.glosses).filter(([k]) => !it.syllables?.includes(k)).map(([k, v]) => `<span class="wg"><b>${esc(k)}</b> ${esc(v)}</span>`).join(" · ")}</div>` : ""}
       <button class="playbtn" data-play="${esc(it.yua)}">${t("play")}</button>
       ${it.transforms?.length ? it.transforms.map((tr) => `<button class="playbtn secondary" data-play="${esc(tr.yua)}">${esc(tr.yua)}</button>`).join(" ") : ""}
     </div>`;
