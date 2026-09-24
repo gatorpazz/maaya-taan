@@ -1,0 +1,406 @@
+number: 3
+title: Where are you from
+title_es: ¿De dónde eres?
+opening:
+  id: l03_open
+  setting_en: Two travelers share a bench at the bus station in Mérida and strike up a conversation.
+  setting_es: Dos viajeros comparten una banca en la terminal de autobuses de Mérida y empiezan a platicar.
+  lines:
+  - speaker: A
+    yua: Bix a beel
+    en: How are you?
+    es: ¿Cómo estás?
+    attested_by:
+    - YUAES0007004
+  - speaker: B
+    yua: Ma'alob. Bix a k'aaba'
+    en: Fine. What's your name?
+    es: Bien. ¿Cómo te llamas?
+    attested_by:
+    - words
+  - speaker: A
+    yua: In k'aaba'e' Luis. Tu'ux a taal
+    en: My name is Luis. Where are you from?
+    es: Me llamo Luis. ¿De dónde eres?
+    attested_by:
+    - words
+  - speaker: B
+    yua: Mérida in taal. Ba'ax kaajilech
+    en: I'm from Mérida. What town are you from?
+    es: Soy de Mérida. ¿De qué pueblo eres?
+    attested_by:
+    - words
+  - speaker: A
+    yua: In kaajale' Hunucmá
+    en: My town is Hunucmá.
+    es: Mi pueblo es Hunucmá.
+    attested_by:
+    - YUAES0006016
+  - speaker: B
+    yua: Jats'uts a kaajal
+    en: Your town is beautiful.
+    es: Tu pueblo es bonito.
+    attested_by:
+    - YUAES0006129
+  - speaker: A
+    yua: Ma'alob túun. Tak sáamal
+    en: Alright then. See you tomorrow.
+    es: Bueno, está bien. Hasta mañana.
+    attested_by:
+    - YUAES0007013
+    - YUAES0007012
+items:
+- id: tuux_a_taal
+  yua: Tu'ux a taal
+  en: Where are you from?
+  es: ¿De dónde eres?
+  syllables:
+  - taal
+  - a taal
+  - Tu'ux a taal
+  literal: where you come
+  literal_es: dónde tú vienes
+  glosses:
+    taal: come, be from
+    a taal: you come
+    Tu'ux: where
+    a: you, your
+  glosses_es:
+    taal: venir, ser de
+    a taal: tú vienes
+    Tu'ux: dónde
+    a: tú, tu
+  note: Literally 'where do you come', and that little 'a' is the same 'your' you heard in 'how are you' back in lesson one.
+  note_es: Literalmente 'de dónde vienes', y esa 'a' es el mismo 'tu' que oíste en '¿cómo estás?' en la lección uno.
+  cues:
+  - You have just met someone at the market. Ask, in a complete sentence, where they are from.
+  - A new coworker has an accent you don't recognize. Ask her, politely and in full, where she is from.
+  cues_es:
+  - Acabas de conocer a alguien en el mercado. Pregúntale, con la frase completa, de dónde es.
+  - Una compañera nueva tiene un acento que no reconoces. Pregúntale, de manera completa y cortés, de dónde es.
+  attested_by:
+  - YUAES0006533
+  - YUAES0010701
+  transforms:
+  - prompt_en: Now ask where HE is from.
+    prompt_es: Ahora pregunta de dónde es ÉL.
+    yua: Tu'ux u taal
+    attested_by:
+    - YUAES0006534
+    - YUAES0010702
+- id: merida_in_taal
+  yua: Mérida in taal
+  en: I'm from Mérida.
+  es: Soy de Mérida.
+  syllables:
+  - taal
+  - in taal
+  - Mérida in taal
+  literal: Mérida I come
+  literal_es: Mérida yo vengo
+  glosses:
+    taal: come, be from
+    in taal: I come
+    Mérida: Mérida
+    in: I, my
+  glosses_es:
+    taal: venir, ser de
+    in taal: yo vengo
+    Mérida: Mérida
+    in: yo, mi
+  note: The place comes first, then 'I come'. Same 'in' as in 'my name is'.
+  note_es: Primero el lugar, luego 'yo vengo'. Es el mismo 'in' de 'me llamo'.
+  cues:
+  - Someone asks where you're from. Tell them you're from Mérida.
+  - The taxi driver wants to know your hometown. Say you're from Mérida.
+  cues_es:
+  - Alguien te pregunta de dónde eres. Dile que eres de Mérida.
+  - El taxista quiere saber de dónde vienes. Di que eres de Mérida.
+  attested_by:
+  - YUAES0006601
+  transforms:
+  - prompt_en: Now say 'you're from Mérida' back to the person you're talking to.
+    prompt_es: 'Ahora dile a la persona con la que hablas: ''eres de Mérida''.'
+    yua: Mérida a taal
+    attested_by:
+    - YUAES0006602
+- id: in_kaajal
+  yua: in kaajal
+  en: my town
+  es: mi pueblo
+  syllables:
+  - kaajal
+  - in kaajal
+  literal: my town
+  literal_es: mi pueblo
+  glosses:
+    kaajal: town, village
+    in: my
+  glosses_es:
+    kaajal: pueblo
+    in: mi
+  note: The first vowel is long, 'kaa-jal'. Hold it a beat.
+  note_es: Aquí la primera vocal es larga, 'kaa-jal'. Alárgala un poquito.
+  cues:
+  - You want to say 'my town'.
+  - You're pointing at a photo of your hometown. Say 'my town'.
+  cues_es:
+  - Quieres decir 'mi pueblo'.
+  - Señalas una foto de tu pueblo. Di 'mi pueblo'.
+  attested_by:
+  - YUAES0010414
+  transforms:
+  - prompt_en: Now say 'your town'.
+    prompt_es: Ahora di 'tu pueblo'.
+    yua: a kaajal
+    attested_by:
+    - YUAES0010459
+- id: tuux_a_kaajal
+  yua: Tu'ux a kaajal
+  en: Where's your town?
+  es: ¿Dónde es tu pueblo?
+  syllables:
+  - kaajal
+  - a kaajal
+  - Tu'ux a kaajal
+  literal: where your town
+  literal_es: dónde tu pueblo
+  glosses:
+    kaajal: town
+    a kaajal: your town
+    Tu'ux: where
+  glosses_es:
+    kaajal: pueblo
+    a kaajal: tu pueblo
+    Tu'ux: dónde
+  note: 'No word for ''is'' needed: ''where'' plus ''your town'' is already a full question.'
+  note_es: 'No hace falta la palabra ''es'': ''dónde'' más ''tu pueblo'' ya es una pregunta completa.'
+  cues:
+  - Your new friend mentioned a town you've never heard of. Ask where his town is.
+  - Ask the woman selling tortillas where her town is.
+  cues_es:
+  - Tu nuevo amigo mencionó un pueblo que no conoces. Pregúntale dónde es su pueblo.
+  - Pregúntale a la señora que vende tortillas dónde es su pueblo.
+  attested_by:
+  - YUAES0005957
+  - YUAES0010695
+  transforms:
+  - prompt_en: Now ask where HIS town is.
+    prompt_es: Ahora pregunta dónde es el pueblo de ÉL.
+    yua: Tu'ux u kaajal
+    attested_by:
+    - YUAES0005958
+    - YUAES0010696
+- id: baax_kaajilech
+  yua: Ba'ax kaajilech
+  en: What town are you from?
+  es: ¿De qué pueblo eres?
+  syllables:
+  - lech
+  - kaajilech
+  - Ba'ax kaajilech
+  literal: what town-of-you
+  literal_es: qué pueblo-de-tú
+  glosses:
+    lech: you
+    kaajilech: you are of a town
+    Ba'ax: what
+    kaajil: town of
+  glosses_es:
+    lech: tú
+    kaajilech: eres de un pueblo
+    Ba'ax: qué
+    kaajil: pueblo de
+  note: Listen to the ending, 'ech'. That ending means 'you', glued right onto the word for town.
+  note_es: Fíjate en la terminación 'ech'. Esa terminación significa 'tú', pegada directamente a la palabra pueblo.
+  cues:
+  - You want to know exactly which town someone is from. Ask what town they're from.
+  - A man says he's from the countryside. Ask what town he's from.
+  cues_es:
+  - Quieres saber exactamente de qué pueblo es alguien. Pregúntale de qué pueblo es.
+  - Un señor dice que es del campo. Pregúntale de qué pueblo es.
+  attested_by:
+  - YUAES0005965
+  transforms:
+  - prompt_en: Now ask 'what town am I from?'
+    prompt_es: Ahora pregunta '¿de qué pueblo soy?'
+    yua: Ba'ax kaajilen
+    attested_by:
+    - YUAES0005964
+- id: tuuxilech
+  yua: Tu'uxilech
+  en: Where are you from?
+  es: ¿De dónde eres?
+  syllables:
+  - ilech
+  - Tu'uxilech
+  literal: where-of-you
+  literal_es: dónde-de-tú
+  glosses:
+    ilech: of you
+    Tu'ux: where
+  glosses_es:
+    ilech: de tú
+    Tu'ux: dónde
+  note: It's 'where' with that same 'ech' ending. One word, a whole question.
+  note_es: Es 'dónde' con la misma terminación 'ech'. Una sola palabra, toda una pregunta.
+  cues:
+  - Ask someone where they're from, in a single word.
+  - A quick, casual way to ask 'where are you from?'
+  cues_es:
+  - Pregúntale a alguien de dónde es, con una sola palabra.
+  - Una forma rápida y casual de preguntar '¿de dónde eres?'
+  attested_by:
+  - YUAES0005521
+  transforms:
+  - prompt_en: Now ask 'where am I from?'
+    prompt_es: Ahora pregunta '¿de dónde soy?'
+    yua: Tu'uxilen
+    attested_by:
+    - YUAES0005520
+- id: jatsuts_a_kaajal
+  yua: Jats'uts a kaajal
+  en: Your town is beautiful.
+  es: Tu pueblo es bonito.
+  syllables:
+  - kaajal
+  - a kaajal
+  - Jats'uts a kaajal
+  literal: beautiful your town
+  literal_es: bonito tu pueblo
+  glosses:
+    kaajal: town
+    a kaajal: your town
+    Jats'uts: beautiful, pretty
+  glosses_es:
+    kaajal: pueblo
+    a kaajal: tu pueblo
+    Jats'uts: bonito, hermoso
+  note: 'The describing word comes first: ''beautiful, your town''.'
+  note_es: 'La palabra que describe va primero: ''bonito, tu pueblo''.'
+  cues:
+  - You've just visited your friend's hometown. Tell him his town is beautiful.
+  - Someone shows you photos of her village. Say her town is beautiful.
+  cues_es:
+  - Acabas de visitar el pueblo de tu amigo. Dile que su pueblo es bonito.
+  - Alguien te muestra fotos de su pueblo. Dile que su pueblo es bonito.
+  attested_by:
+  - YUAES0006129
+  transforms:
+  - prompt_en: Now say 'my town is beautiful'.
+    prompt_es: Ahora di 'mi pueblo es bonito'.
+    yua: Jats'uts in kaajal
+    attested_by:
+    - YUAES0006128
+- id: in_kaajale_hunucma
+  yua: In kaajale' Hunucmá
+  en: My town is Hunucmá.
+  es: Mi pueblo es Hunucmá.
+  syllables:
+  - Hunucmá
+  - kaajale' Hunucmá
+  - In kaajale' Hunucmá
+  literal: my town, Hunucmá
+  literal_es: mi pueblo, Hunucmá
+  glosses:
+    Hunucmá: Hunucmá, a town near Mérida
+    kaajale': town
+    In: my
+  glosses_es:
+    Hunucmá: Hunucmá, un pueblo cerca de Mérida
+    kaajale': pueblo
+    In: mi
+  note: 'That little catch at the end of ''kaajale'''' works like a comma: ''my town... Hunucmá''.'
+  note_es: 'Ese cortecito al final de ''kaajale'''' funciona como una coma: ''mi pueblo... Hunucmá''.'
+  cues:
+  - Someone asks what town you're from. Say your town is Hunucmá.
+  - 'Introduce your hometown: ''My town is Hunucmá.'''
+  cues_es:
+  - Alguien te pregunta de qué pueblo eres. Di que tu pueblo es Hunucmá.
+  - 'Presenta tu pueblo: ''Mi pueblo es Hunucmá.'''
+  attested_by:
+  - YUAES0006016
+  transforms:
+  - prompt_en: Now say 'your town is Hunucmá'.
+    prompt_es: Ahora di 'tu pueblo es Hunucmá'.
+    yua: A kaajale' Hunucmá
+    attested_by:
+    - YUAES0006017
+- id: tuux_siijech
+  yua: Tu'ux síijech
+  en: Where were you born?
+  es: ¿Dónde naciste?
+  syllables:
+  - síijech
+  - Tu'ux síijech
+  literal: where born-you
+  literal_es: dónde naciste-tú
+  glosses:
+    síijech: you were born
+    Tu'ux: where
+    síij: be born
+  glosses_es:
+    síijech: naciste
+    Tu'ux: dónde
+    síij: nacer
+  note: 'There''s that ''ech'' again on the end: ''born-you''. The vowel before it is long and high, ''síij''.'
+  note_es: 'Otra vez la terminación ''ech'': ''naciste-tú''. La vocal de antes es larga y aguda, ''síij''.'
+  cues:
+  - Your friend grew up in Mérida but you suspect he was born elsewhere. Ask where he was born.
+  - Ask the old man where he was born.
+  cues_es:
+  - Tu amigo creció en Mérida pero sospechas que nació en otro lado. Pregúntale dónde nació.
+  - Pregúntale al señor mayor dónde nació.
+  attested_by:
+  - YUAES0005514
+  transforms:
+  - prompt_en: Now ask 'where was I born?'
+    prompt_es: Ahora pregunta '¿dónde nací?'
+    yua: Tu'ux síijen
+    attested_by:
+    - YUAES0005513
+grammar_note: 'You heard the same ending three times, on ''what town are you from'', ''where are you from'' and ''where were
+  you born'': that ''ech'' on the end means ''you'', and swapping it for ''en'' turns the sentence back to ''I''.'
+grammar_note_es: 'Oíste la misma terminación tres veces, en ''¿de qué pueblo eres?'', ''¿de dónde eres?'' y ''¿dónde naciste?'':
+  ese ''ech'' al final significa ''tú'', y si lo cambias por ''en'' la frase vuelve a hablar de ''yo''.'
+closing:
+  id: l03_close
+  setting_en: Later that week, Luis runs into a different traveler outside the same station.
+  setting_es: Esa misma semana, Luis se encuentra con otro viajero afuera de la misma terminal.
+  lines:
+  - speaker: A
+    yua: Bix túun
+    en: Hey, how's it going?
+    es: ¿Hola, qué tal?
+    attested_by:
+    - YUAES0007001
+  - speaker: B
+    yua: Ma'alob. Tu'uxilech
+    en: Fine. Where are you from?
+    es: Bien. ¿De dónde eres?
+    attested_by:
+    - words
+  - speaker: A
+    yua: Mérida in taal. Tu'ux síijech
+    en: I'm from Mérida. Where were you born?
+    es: Soy de Mérida. ¿Dónde naciste?
+    attested_by:
+    - words
+  - speaker: B
+    yua: In kaajale' Hunucmá. Jats'uts in kaajal
+    en: My town is Hunucmá. My town is beautiful.
+    es: Mi pueblo es Hunucmá. Mi pueblo es bonito.
+    attested_by:
+    - words
+  - speaker: A
+    yua: Ma'alob túun. Táan in bin. Tak tu jeel k'iin
+    en: Alright then. I'm off. See you later.
+    es: Está bien, pues. Ya me voy. Hasta otro día.
+    attested_by:
+    - words
+  - speaker: B
+    yua: Kanáantabaj
+    en: Take care.
+    es: Cuídate.
+    attested_by:
+    - YUAES0007014

@@ -33,18 +33,56 @@ Hard rules:
 10. `grammar_note` is one sentence, spoken once, pointing at a pattern the learner has just heard.
 11. The course is also taught in Spanish. For every English teaching field give the Spanish counterpart, written for a Spanish speaker rather than translated word by word: `es` (use the corpus Spanish for attested phrases), `literal_es`, `note_es`, `cues_es`, `glosses_es`, `prompt_es`, `setting_es`, line `es`, `title_es`, `grammar_note_es`.
 
-Output only a YAML document in a ```yaml fence, matching this shape exactly:
+Output only a YAML document in a ```yaml fence. Use BLOCK style throughout (one key per line, lists with `- `); never use flow style `{...}` or `[...]` for anything except `syllables`, `cues`, `cues_es`, `attested_by`, and `needs_review`. Double-quote every string value (Maya, English, Spanish), so `?`, `:`, `¿`, `'` and commas are safe. Shape:
 
 number: <int>
-title: <string>
-title_es: <string>
-opening: {id: lNN_open, setting_en: <one sentence>, setting_es: ..., lines: [{speaker: A|B, yua: ..., en: ..., es: ...}, ...]}
+title: "<string>"
+title_es: "<string>"
+opening:
+  id: lNN_open
+  setting_en: "<one sentence>"
+  setting_es: "<one sentence>"
+  lines:
+    - speaker: A
+      yua: "..."
+      en: "..."
+      es: "..."
+    - speaker: B
+      yua: "..."
+      en: "..."
+      es: "..."
 items:
-  - {id: snake_case, yua: ..., en: ..., es: ..., literal: ..., literal_es: ..., syllables: [...], glosses: {...}, glosses_es: {...}, note: ..., note_es: ..., cues: [...], cues_es: [...], transforms: [{prompt_en: ..., prompt_es: ..., yua: ...}]}
-grammar_note: <string>
-grammar_note_es: <string>
-closing: {id: lNN_close, setting_en: ..., setting_es: ..., lines: [...]}
-needs_review: [<Maya strings you wanted but could not attest>]
+  - id: snake_case
+    yua: "..."
+    en: "..."
+    es: "..."
+    literal: "..."
+    literal_es: "..."
+    syllables: ["...", "...", "<full phrase>"]
+    glosses:
+      "<chunk or word>": "<meaning>"
+    glosses_es:
+      "<chunk or word>": "<significado>"
+    note: "..."
+    note_es: "..."
+    cues: ["...", "..."]
+    cues_es: ["...", "..."]
+    transforms:
+      - prompt_en: "..."
+        prompt_es: "..."
+        yua: "..."
+grammar_note: "<string>"
+grammar_note_es: "<string>"
+closing:
+  id: lNN_close
+  setting_en: "..."
+  setting_es: "..."
+  lines:
+    - speaker: A
+      yua: "..."
+      en: "..."
+      es: "..."
+needs_review: ["<Maya strings you wanted but could not attest>"]
 """
 
 
@@ -127,7 +165,13 @@ def draft(number: int, taught: list[Item], backend: str = "auto") -> tuple[Lesso
     text = ask(SYSTEM, build_prompt(number, taught))
     m = re.search(r"```yaml\s*(.*?)```", text, re.S)
     raw = m.group(1) if m else text
-    data = yaml.safe_load(raw)
+    try:
+        data = yaml.safe_load(raw)
+    except yaml.YAMLError as e:
+        dump = Path("out/drafts") / f"lesson{number:02d}.raw.txt"
+        dump.parent.mkdir(parents=True, exist_ok=True)
+        dump.write_text(text, encoding="utf-8")
+        raise RuntimeError(f"model output is not valid YAML ({e.__class__.__name__}); raw output saved to {dump}") from e
     needs_review = data.pop("needs_review", []) or []
     lesson = Lesson.model_validate(data)
     _fill_attestation(lesson)
