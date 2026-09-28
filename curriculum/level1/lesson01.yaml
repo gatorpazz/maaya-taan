@@ -60,7 +60,7 @@ items:
     cues_es:
       - Acabas de conocer a alguien. Pregúntale su nombre.
     transforms:
-      - {prompt_en: "Now ask, what's his name?", prompt_es: "Ahora pregunta, ¿cómo se llama él?", yua: "Bix u k'aaba'", attested_by: [YUAES0004155]}
+      - {prompt_en: "Now ask, what's his name? Only the little word in the middle changes, from your to his. Try it.", prompt_es: "Ahora pregunta, ¿cómo se llama él? Solo cambia la palabrita del medio, de tu a su. Inténtalo.", yua: "Bix u k'aaba'", attested_by: [YUAES0004155]}
     attested_by: [YUAES0004153]
   - id: in_kaabae
     yua: In k'aaba'e' Luis
@@ -71,8 +71,8 @@ items:
     syllables: [e', ba'e', k'aaba'e', In k'aaba'e', In k'aaba'e' Luis]
     glosses: {In k'aaba'e': my name is}
     glosses_es: {In k'aaba'e': mi nombre es}
-    note: In means my. When you say this yourself, put your own name at the end.
-    note_es: In significa mi. Cuando lo digas tú, pon tu propio nombre al final.
+    note: The first little word is my. When you say this yourself, put your own name at the end.
+    note_es: La primera palabrita es mi. Cuando lo digas tú, pon tu propio nombre al final.
     cues:
       - Someone asks your name. Tell them, using the name Luis.
     cues_es:
@@ -136,12 +136,12 @@ items:
     note: K'iin means day, and also sun.
     note_es: K'iin significa día, y también sol.
     cues:
-      - Say goodbye without promising a day.
+      - You're leaving and don't know when you'll see your friend again. Say, see you later.
     cues_es:
-      - Despídete sin prometer un día.
+      - Te vas y no sabes cuándo volverás a ver a tu amigo. Di, hasta luego.
     attested_by: [YUAES0007010]
-grammar_note: "You've heard a in front of beel and k'aaba', your road, your name. And in in front of k'aaba', my name. A means your, in means my."
-grammar_note_es: "Has oído a delante de beel y de k'aaba': tu camino, tu nombre. Y in delante de k'aaba': mi nombre. A significa tu, in significa mi."
+grammar_note: "In how are you and what's your name, the little word before road and before name means your. When you give your own name, the little word before name means my."
+grammar_note_es: "En cómo estás y cómo te llamas, la palabrita que va antes de camino y de nombre significa tu. Cuando dices tu propio nombre, la palabrita antes de nombre significa mi."
 closing:
   id: l01_close
   setting_en: Later the same day, José runs into Luis again and has to hurry off.

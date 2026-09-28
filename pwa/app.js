@@ -432,8 +432,21 @@ function highlight(initial = false) {
   const tx = $("#tx"); if (!tx) return;
   tx.querySelectorAll(".seg.current").forEach((el) => el.classList.remove("current"));
   const li = tx.querySelector(`.seg[data-i="${state.current}"]`);
-  if (li) { li.classList.add("current"); if (state.prefs.follow && !initial) li.scrollIntoView({ block: "center", behavior: "smooth" }); }
+  if (li) { li.classList.add("current"); if (state.prefs.follow && !initial && !userScrolling()) li.scrollIntoView({ block: "center", behavior: "smooth" }); }
 }
+
+// Follow-along yields to the reader: after a touch, wheel or key scroll, the transcript stays put for a while
+// (or until playback pauses or the reader taps a line), so scrolling back up isn't fought by the auto-scroll.
+const FOLLOW_HOLD_MS = 10000;
+let followHeldUntil = 0;
+const userScrolling = () => Date.now() < followHeldUntil;
+const holdFollow = () => { followHeldUntil = Date.now() + FOLLOW_HOLD_MS; };
+const releaseFollow = () => { followHeldUntil = 0; };
+window.addEventListener("wheel", holdFollow, { passive: true });
+window.addEventListener("touchmove", holdFollow, { passive: true });
+window.addEventListener("keydown", (e) => { if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(e.key)) holdFollow(); });
+audio.addEventListener("pause", releaseFollow);
+audio.addEventListener("seeking", releaseFollow);
 
 // ---------------------------------------------------------------- finish
 function finishLesson() {
