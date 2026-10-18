@@ -6,7 +6,7 @@ Grammar is taught organically: one narrator sentence per lesson, never a paradig
 | # | Title | New material | Grammar seed | Corpus contexts |
 |---|---|---|---|---|
 | 1 | Meeting someone | Bix a beel, Ma'alob, Bix a k'aaba', In k'aaba'e', Tak sáamal, Táan in bin | `a` = your, `in` = my | 0019, 0020, 0008 |
-| 2 | Good morning, good night | Diiyáas / Taardes / Nooches + kin terms (na', yuum, kiik, suku'un), Ma'alob túun, Tak tu jeel k'iin | Spanish loans for greetings | 0019, 0020, 0022 |
+| 2 | Good day, good night | Ma'alob k'iin / u chíinil k'iin / áak'ab (standard greetings, words-attested), Bix yanikech, Ka xi'ik tech uts, Tak ka'aka'ate', Tak sáamal in suut | `Ka` = may (wishes); standard vs. colloquial greetings | 0019, 0020 |
 | 3 | Where are you from | Tu'ux a taal, Mérida in taal, in kaajal, Ba'ax kaajilech | `-ech` = you (Set B) | 0014, 0012 |
 | 4 | Where do you live | Tu'ux kajakbalech, Kajakbalen ti' …, weye' (here), te'elo' (there) | `-en` = I (Set B) | 0015, 0025 |
 | 5 | I'm going, I'm leaving | Táan in bin + destination (merkaado, paarkée, najil), Ko'ox, Tin bin | `táan` = progressive | 0003, 0001, 0002 |
