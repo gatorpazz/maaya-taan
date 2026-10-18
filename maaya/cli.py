@@ -118,6 +118,8 @@ def attest(text: str):
     typer.echo(f"{r.level}: {text}")
     if r.exact_ids:
         typer.echo(f"  corpus ids: {', '.join(r.exact_ids[:5])}")
+    for sp in r.standard:
+        typer.echo(f"  standard {sp.id}: {sp.es}  |  sources: {sp.sources}" + (f"  |  {sp.note}" if sp.note else ""))
     if r.unknown_words:
         typer.echo(f"  unknown words: {', '.join(r.unknown_words)}")
     for pid, yua, es in r.similar[:5]:
@@ -125,7 +127,7 @@ def attest(text: str):
 
 
 @app.command()
-def lint(level: str = "level1", lang: str = "en"):
+def lint(level: str = "level1", lang: str = "en", verbose: bool = typer.Option(False, help="also list strings attested only by the standard-phrase list")):
     """Validate every lesson: attestation, item counts, duplicate ids, estimated length; with --lang es, missing Spanish."""
     from maaya.attest import Attester
     from maaya.learner import LearnerState
@@ -149,6 +151,8 @@ def lint(level: str = "level1", lang: str = "en"):
             elif not r.ok:
                 typer.echo(f"L{les.number:02d} {r.level.upper():7s} {label}: {yua}  unknown={r.unknown_words}")
                 problems += 1
+            elif r.level == "standard" and verbose:
+                typer.echo(f"L{les.number:02d} STD     {label}: {yua}  ({', '.join(sp.sources for sp in r.standard)})")
         for i in les.items:
             for c in i.syllables:
                 if c.lower() not in i.yua.lower():

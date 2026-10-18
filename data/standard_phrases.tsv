@@ -1,0 +1,37 @@
+id	yua	es	en	sources	note
+STD0001	Ma'alob k'iin	Buenos días	Good morning; good day	PORESTO2023B,PORESTO2023A	standardized calque of the Spanish greeting; not used in MAYMAY2010, whose native-speaker dialogues open with Bix a beel
+STD0002	Ma'alob chíinil k'iin	Buenas tardes	Good afternoon	PORESTO2023B,NAATIK	literally good sinking-of-the-sun; NAATIK spells it Ma'lob chí inil kíin
+STD0003	Ma'alob u chíinil k'iin	Buenas tardes	Good afternoon	LESSON02	variant with the possessive u, as in the corpus collocation u chíinil k'iin (YUAES0003653); the author's preferred form
+STD0004	Ma'alob áak'ab	Buenas noches	Good night; good evening	PORESTO2023B	standardized calque; NAATIK gives Ma'lob ak'abtal (nightfall) instead
+STD0005	Ma'alob ja'atskab k'iin	Buenos días (temprano)	Good morning (early)	NAATIK	ja'atskab k'iin = early morning, attested in the corpus (YUAES0012900)
+STD0006	Yutsil ja'atskab	Buenos días	Good morning	YUCTODAY2025	yutsil = its goodness; the Yucatán Today set of greetings
+STD0007	Yutsil chíinil k'iin	Buenas tardes	Good afternoon	YUCTODAY2025	
+STD0008	Yutsil áak'ab	Buenas noches	Good evening	YUCTODAY2025	
+STD0009	Dios bo'otik	Gracias	Thank you	MAYMAY2010,NAATIK	literally God pays it; the everyday thanks (MAYMAY2010 dialogues III, IV, V)
+STD0010	Jach Dios bo'otik	Muchas gracias	Thank you very much	MAYMAY2010	dialogue V
+STD0011	Jach ya'abkach Dios bo'otik	Muchísimas gracias	Thank you so much	MAYMAY2010	dialogue IV
+STD0012	Yuum bo'otik	Muchas gracias	Thank you (lit. the Lord pays it)	PORESTO2023B	also written Yum bo'otik
+STD0013	Níib óolal	Gracias	Thank you	UNOTV2022,YUCATART2018	the purist neologism used in schooling; press sources garble it as Nib'oolal; prefer Dios bo'otik in speech
+STD0014	Mix ba'al	De nada; nada, sin novedad	You're welcome; nothing	MAYMAY2010,UNOTV2022	reply to thanks (dialogue III: Ma'alob, mix ba'al) and to how are you (footnote, dialogue IV)
+STD0015	Beet uts	Por favor	Please	PORESTO2023B	literally do good; press spells it Bet uts
+STD0016	Meent uts	Por favor	Please	NAATIK	same formula with the verb meent; NAATIK spells it Meent' uts
+STD0017	Ki'imak in wóol in wilikech	Me da gusto verte	Glad to see you	MAYMAY2010	dialogue II; NAATIK gives it as pleased to meet you
+STD0018	Jach ki'imak in wóol in k'aj óoltikech	Mucho gusto en conocerte	Pleased to meet you	MAYMAY2010	dialogue I
+STD0019	Ki'imak óolal	Bienvenido; mucho gusto	Welcome	NAATIK,PORESTO2023A	NAATIK spells it Kíimak óolal
+STD0020	Kux teech	¿Y tú?	And you?	MAYMAY2010	reply turn after Ma'alob (dialogue II)
+STD0021	Kux túun teech	¿Y tú, pues?	And you, then?	MAYMAY2010	dialogue I
+STD0022	Ma'alob xan	Bien también	Fine too	MAYMAY2010	dialogue II
+STD0023	Bey xan teen	Yo también; igualmente	Me too; likewise	MAYMAY2010	dialogues I and II
+STD0024	Bix a wanil	¿Cómo estás?	How are you?	MAYMAY2010,YUCTODAY2025,UNOTV2022	MAYMAY2010 footnote lists it with Bix yanilech and Bix anikech as alternatives to Bix a beel
+STD0025	Bix anikech	¿Cómo estás?	How are you?	MAYMAY2010	footnote, dialogue II
+STD0026	Ba'ax ka wa'alik	¿Qué dices?; hola	What do you say?; hey	MAYMAY2010,NAATIK	casual opener (dialogue IV); NAATIK lists it as a general hello
+STD0027	Ko'ox	Vamos	Let's go	MAYMAY2010	dialogue VI and phrase lists
+STD0028	Ko'one'ex	Vámonos	Let's go (all of us)	MAYMAY2010	prologue
+STD0029	Xi'ik tech utsil	Que te vaya bien	Hope it goes well for you	MAYMAY2010	dialogue I closing; corpus has Ka xi'ik tech uts (YUAES0007018)
+STD0030	Xi'ik te'ex utsil	Que les vaya bien	Hope it goes well for you all	MAYMAY2010	prologue
+STD0031	Tu jeel k'iine' k ka' tsikbal	Otro día volvemos a platicar	We'll talk again another day	MAYMAY2010	dialogue I closing
+STD0032	Ka'akate'	Hasta luego; al rato	See you later	MAYMAY2010	dialogue II closing; corpus spells it ka'aka'ate' (YUAES0007023)
+STD0033	Je'el k ilikba te'elo'	Allá nos vemos	We'll see each other there	MAYMAY2010	dialogue II
+STD0034	K'oja'anen	Estoy enfermo	I'm sick	YUCTODAY2025,UNOTV2022	reply to how are you
+STD0035	Tin na'atik	Entiendo	I understand	NAATIK	NAATIK gives Tene tin na'atik
+STD0036	Jaaj	Sí	Yes	MAYMAY2010	dialogue I; also in the corpus as part of longer phrases

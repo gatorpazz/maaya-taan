@@ -6,7 +6,12 @@ Live: https://maaya-taan.gatorpazz.workers.dev. Source: https://github.com/gator
 ## Non-negotiable content rules
 
 - **Never invent Maya.** Every Maya string in `curriculum/` must be attested in `lexicon.db` (YUA-ES-CCC corpus or
-  Wiktionary) or marked `attested_by: [REVIEW]`. Check any string with `uv run maya attest "..."`. `maya lint` enforces it.
+  Wiktionary), or in `data/standard_phrases.tsv` (published, sourced phrases the corpus lacks; cite the `STDnnnn` id), or
+  marked `attested_by: [REVIEW]`. Check any string with `uv run maya attest "..."`. `maya lint` enforces it.
+- **The corpus is a sample, not the language.** When the corpus lacks something the syllabus needs (greetings, thanks,
+  polite formulas), say so and list the published alternatives with their attestation status; never declare the gap
+  final. A phrase that is standard in teaching materials but absent from the corpus goes into `data/standard_phrases.tsv`
+  with its source in `data/SOURCES.md`, after the author agrees.
 - **The narrator never says a Maya word.** Narrator copy (English or Spanish) gives the meaning; the Maya voice says the Maya.
   Meaning always comes *before* the Maya.
 - **Buildup chunks are substrings.** `syllables` is the backward buildup in speaking order, ending with the full phrase; every

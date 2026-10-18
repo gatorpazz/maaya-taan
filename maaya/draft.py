@@ -115,14 +115,22 @@ def build_prompt(number: int, taught: list[Item]) -> str:
     sample = corpus_sample(_contexts_from_row(row) or ["COMMC0019"])
     taught_txt = "\n".join(f"- {i.id}: {i.yua} = {i.en}" for i in taught) or "- (nothing yet)"
     phrases_txt = "\n".join(f"{pid}\t{yua}\t{es}" for pid, yua, es in sample)
+    from maaya.attest import load_standard
+
+    standard_txt = "\n".join(f"{sp.id}\t{sp.yua}\t{sp.es}\t({sp.note})" if sp.note else f"{sp.id}\t{sp.yua}\t{sp.es}"
+                             for sp in load_standard()) or "(none)"
     return f"""SYLLABUS SLOT (markdown table row: number | title | new material | grammar seed | contexts):
 {row}
 
 PREVIOUSLY TAUGHT (do not re-teach; reuse freely):
 {taught_txt}
 
-ATTESTED PHRASES (id, Maya, Spanish) — the only Maya you may use:
+ATTESTED PHRASES (id, Maya, Spanish) — the only Maya you may use, together with the STANDARD PHRASES below:
 {phrases_txt}
+
+STANDARD PHRASES (id, Maya, Spanish, note): published greetings and courtesy formulas from teaching materials that the
+corpus lacks. Prefer these over corpus phrases when the syllabus slot calls for greetings, thanks, or polite formulas:
+{standard_txt}
 
 Write lesson {number}."""
 
@@ -183,7 +191,9 @@ def _fill_attestation(lesson: Lesson) -> None:
 
     def ids(text: str) -> list[str]:
         r = a.check(text)
-        return r.exact_ids[:3] if r.level == "exact" else (["words"] if r.level == "words" else ["REVIEW"])
+        if r.level in ("exact", "standard"):
+            return r.ids[:3]
+        return ["words"] if r.level == "words" else ["REVIEW"]
 
     for d in (lesson.opening, lesson.closing):
         if d:

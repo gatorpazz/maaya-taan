@@ -11,7 +11,7 @@ opening:
     en: Good morning.
     es: Buenos días.
     attested_by:
-    - words
+    - STD0001
   - speaker: B
     yua: Ma'alob k'iin. Bix yanikech
     en: Good morning. How are you?
@@ -55,8 +55,8 @@ opening:
     attested_by:
     - words
 items:
-# The three time-of-day greetings are the standardized forms used in Maya-language schooling and media.
-# They are not corpus phrases; every word is attested (level "words"), and "u chíinil k'iin" is attested as a collocation.
+# The three time-of-day greetings are the standardized school-and-media forms; they are not corpus phrases.
+# They are attested by data/standard_phrases.tsv (STD ids; sources in data/SOURCES.md).
 - id: maalob_kiin
   yua: Ma'alob k'iin
   en: Good morning. Good day.
@@ -81,7 +81,7 @@ items:
   cues_es:
   - Entras a una tienda por la mañana. Saluda al dueño con cortesía.
   attested_by:
-  - words
+  - STD0001
 - id: maalob_u_chiinil_kiin
   yua: Ma'alob u chíinil k'iin
   en: Good afternoon.
@@ -110,7 +110,7 @@ items:
   cues_es:
   - Son las tres de la tarde y pasas junto a la señora que vende tortillas. Salúdala.
   attested_by:
-  - words
+  - STD0003
 - id: maalob_aakab
   yua: Ma'alob áak'ab
   en: Good night.
@@ -137,7 +137,7 @@ items:
   - Llegas a casa de un amigo ya de noche. Salúdalo.
   - Te vas a dormir en la posada. Dale las buenas noches al dueño.
   attested_by:
-  - words
+  - STD0004
 - id: bix_yanikech
   yua: Bix yanikech
   en: How are you doing?
@@ -358,7 +358,7 @@ closing:
     en: Good afternoon.
     es: Buenas tardes.
     attested_by:
-    - words
+    - STD0003
   - speaker: B
     yua: Ma'alob u chíinil k'iin. Bix túun
     en: Good afternoon. How's it going?
