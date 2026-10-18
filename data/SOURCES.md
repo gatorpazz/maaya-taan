@@ -24,6 +24,7 @@ even when the source uses the 1984 alphabet or a loose press spelling, and recor
 | PORESTO2023B | Redacción Por Esto!, "¿Cómo se dice por favor y gracias en maya?", 2023-08-17. https://www.poresto.com/yucatan/2023/8/17/como-se-dice-por-favor-gracias-en-maya.html | Press, uncredited |
 | UNOTV2022 | UnoTV, "Descubre frases básicas para aprender a hablar maya", 2022-02-25. https://www.unotv.com/estados/yucatan/lengua-maya-frases-basicas-para-hablarla/ | Press; encoding-damaged spellings |
 | YUCATART2018 | yucat.art.blog, "10 palabras y frases en maya que debes conocer", 2018-11-19. https://yucat.art.blog/2018/11/19/primera-entrada-del-blog/ | Blog |
+| SEP2018 | SEP/DGEIIB, *Lengua materna. Maya. Primer grado* (libro de texto gratuito, 2018), p. 63: the four parts of the day Ja'atskab k'iin, Chúumuk k'iin, Chíinil k'iin, Áak'ab. https://dgeiib.basica.sep.gob.mx/files/fondo-editorial/lengua-materna-lengua-indigena/libros-del-alumno-primer-grado/lmli_la1g_00005.pdf | Government primer; confirms the time-of-day nouns and spelling, not the greeting formulas |
 | LESSON02 | Author's choice for lesson 2 (2026-10-18), built on the corpus collocation *u chíinil k'iin* | Course decision |
 
 Reliability, best first: MAYMAY2010 (native speaker, academic press), then NAATIK and YUCTODAY2025, then the press

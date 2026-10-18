@@ -1,9 +1,9 @@
 id	yua	es	en	sources	note
 STD0001	Ma'alob k'iin	Buenos días	Good morning; good day	PORESTO2023B,PORESTO2023A	standardized calque of the Spanish greeting; not used in MAYMAY2010, whose native-speaker dialogues open with Bix a beel
-STD0002	Ma'alob chíinil k'iin	Buenas tardes	Good afternoon	PORESTO2023B,NAATIK	literally good sinking-of-the-sun; NAATIK spells it Ma'lob chí inil kíin
+STD0002	Ma'alob chíinil k'iin	Buenas tardes	Good afternoon	PORESTO2023B,NAATIK,SEP2018	literally good sinking-of-the-sun; NAATIK spells it Ma'lob chí inil kíin; chíinil k'iin = afternoon in SEP2018 p. 63
 STD0003	Ma'alob u chíinil k'iin	Buenas tardes	Good afternoon	LESSON02	variant with the possessive u, as in the corpus collocation u chíinil k'iin (YUAES0003653); the author's preferred form
-STD0004	Ma'alob áak'ab	Buenas noches	Good night; good evening	PORESTO2023B	standardized calque; NAATIK gives Ma'lob ak'abtal (nightfall) instead
-STD0005	Ma'alob ja'atskab k'iin	Buenos días (temprano)	Good morning (early)	NAATIK	ja'atskab k'iin = early morning, attested in the corpus (YUAES0012900)
+STD0004	Ma'alob áak'ab	Buenas noches	Good night; good evening	PORESTO2023B,SEP2018	standardized calque; NAATIK gives Ma'lob ak'abtal (nightfall) instead; áak'ab = night in SEP2018 p. 63
+STD0005	Ma'alob ja'atskab k'iin	Buenos días (temprano)	Good morning (early)	NAATIK,SEP2018	ja'atskab k'iin = morning in SEP2018 p. 63 and in the corpus (YUAES0012900)
 STD0006	Yutsil ja'atskab	Buenos días	Good morning	YUCTODAY2025	yutsil = its goodness; the Yucatán Today set of greetings
 STD0007	Yutsil chíinil k'iin	Buenas tardes	Good afternoon	YUCTODAY2025	
 STD0008	Yutsil áak'ab	Buenas noches	Good evening	YUCTODAY2025	
